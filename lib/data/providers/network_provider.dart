@@ -1,4 +1,3 @@
-import 'package:boring_app/data/providers/logging_interceptor.dart';
 import 'package:boring_app/utils/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -14,10 +13,6 @@ class NetworkProvider {
         receiveTimeout: const Duration(seconds: 3),
       ),
     );
-
-    _dio.interceptors.addAll([
-      LoggingInterceptor(),
-    ]);
   }
 
   Future<Response<T>> _httpWrapper<T>(
