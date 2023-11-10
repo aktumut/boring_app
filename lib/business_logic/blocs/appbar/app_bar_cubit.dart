@@ -1,27 +1,68 @@
-import 'package:bloc/bloc.dart';
+import 'dart:async';
 import 'package:boring_app/utils/theme.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'app_bar_state.dart';
 
-class AppBarCubit extends Cubit<AppBarState> {
-  final ScrollController scrollController = ScrollController();
+/// Manages the state of AppBar based on scroll events and provides animation for AppBar expansion.
 
-  AppBarCubit() : super(AppBarExpanded()) {
-    scrollController.addListener(_onScroll);
+class AppBarCubit extends Cubit<AppBarState> {
+  final ScrollController _scrollController;
+  Timer? _timer;
+
+  AppBarCubit(this._scrollController) : super(AppBarExpanded()) {
+    _scrollController.addListener(_onScroll);
   }
 
   void _onScroll() {
-    final bool isAppBarExpanded =
-        scrollController.offset < (tHeightAppBar - kToolbarHeight);
+    final isAppBarExpanded =
+        _scrollController.offset < (tHeightAppBar - kToolbarHeight);
     emit(isAppBarExpanded ? AppBarExpanded() : AppBarCollapsed());
   }
 
+  void expandAppBarWithAllFilters(double finalAppBarHeight) {
+    final stepTime =
+        tDurationAppBarAnimation.inMilliseconds / tStepsAppBarAnimation;
+    int currentStep = 0;
+
+    _timer?.cancel();
+    _timer = Timer.periodic(Duration(milliseconds: stepTime.toInt()), (timer) {
+      currentStep++;
+      double newHeight = _calculateNewHeight(currentStep, finalAppBarHeight);
+
+      emit(AppBarWithAllFilters(newHeight));
+
+      if (currentStep == tStepsAppBarAnimation) {
+        timer.cancel();
+      }
+    });
+  }
+
+  double _calculateNewHeight(int currentStep, finalAppBarHeight) {
+    if (currentStep <= tStepsAppBarAnimation / 2) {
+      return tHeightAppBar +
+          (currentStep *
+              ((tHeightMaxAppBar - tHeightAppBar) /
+                  (tStepsAppBarAnimation / 2)));
+    } else {
+      return tHeightMaxAppBar -
+          ((currentStep - tStepsAppBarAnimation / 2) *
+              ((tHeightMaxAppBar - finalAppBarHeight) /
+                  (tStepsAppBarAnimation / 2)));
+    }
+  }
+
+  void resetAppBar() {
+    emit(AppBarExpanded());
+  }
+
   @override
-  Future<void> close() {
-    scrollController.removeListener(_onScroll);
-    scrollController.dispose();
+  Future<void> close() async {
+    _timer?.cancel();
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
     return super.close();
   }
 }
