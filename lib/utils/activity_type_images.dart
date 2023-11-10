@@ -17,4 +17,6 @@ final Map<String, String> activityTypeImages = {
       'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaWN8ZW58MHx8MHx8fDI%3D',
   'busywork':
       'https://images.unsplash.com/photo-1485965373059-f07657e9f841?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzeSUyMHdvcmtpbmd8ZW58MHx8MHx8fDI%3D',
+  'notFound':
+      'https://images.unsplash.com/photo-1485217988980-11786ced9454?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJ1c3klMjB3b3JraW5nfGVufDB8fDB8fHwy',
 };
