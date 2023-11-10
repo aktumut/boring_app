@@ -19,12 +19,12 @@ class CustomSliverAppBar extends StatelessWidget {
     return BlocBuilder<AppBarCubit, AppBarState>(
       builder: (BuildContext context, AppBarState state) {
         return SliverAppBar(
-          title: state is AppBarExpanded && state is! AppBarWithAllFilters
+          title: state is AppBarExpanded
               ? null
               : const Text(
-                  tTextSlogan,
-                  style: tTextStyleHeader2,
-                ),
+            tTextSlogan,
+            style: tTextStyleHeader2,
+          ),
           elevation: 0,
           expandedHeight: state is AppBarWithAllFilters
               ? state.heightAppBarWithFilters
