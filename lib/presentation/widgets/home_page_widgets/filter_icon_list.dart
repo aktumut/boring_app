@@ -19,7 +19,7 @@ class FilterIconList extends StatelessWidget {
         } else if (state is ActivityError) {
           return Center(child: Text(state.message));
         } else {
-          return const Center(child: Text('Unknown State'));
+          return const Center(child: Text('Restart Your App'));
         }
       },
     );
