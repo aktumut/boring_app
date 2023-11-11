@@ -71,7 +71,7 @@ class ActivityListTileDetails extends StatelessWidget {
             color: getColorBasedOnPrice(activity.price!)),
         const SizedBox(height: tSpaceHalf),
         Text(
-          formatPrice(activity.price!),
+          formatPriceText(activity.price!),
           style: tTextStyleActivityListTileHeader,
         ),
       ],
