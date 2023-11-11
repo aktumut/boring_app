@@ -14,7 +14,7 @@ class ActivityLoaded extends ActivityState {
 
   final List<ActivityModel> activities;
   final List<String> activityTypes;
-  String selectedFilter = 'All';
+  String selectedFilter = tTextFilterAll;
 
   @override
   List<Object> get props => [activities, activityTypes, selectedFilter];
