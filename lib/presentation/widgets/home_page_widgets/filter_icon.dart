@@ -27,7 +27,7 @@ class FilterIcon extends StatelessWidget {
           borderRadius: BorderRadius.circular(tRadiusFilterWidget),
           border: Border.all(
             width: tWidthBorderFilterWidget,
-            color: isSelected ? tColorWhite : tColorGray,
+            color: isSelected ? tColorWhite : tColorLightGray,
           ),
           color: isSelected ? tColorWhite : tColorPrimary,
         ),
