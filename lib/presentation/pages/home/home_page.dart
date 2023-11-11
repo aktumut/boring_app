@@ -1,4 +1,5 @@
 import 'package:boring_app/business_logic/blocs/appbar/app_bar_cubit.dart';
+import 'package:boring_app/helpers/bottom_bouncing_scroll_physics.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/activity_list.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/call_to_action_button.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/curved_shape_painter.dart';
@@ -9,9 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
-  ScrollController scrollController;
+  ScrollController appBarScrollController;
+  ScrollController activityListScrollController;
 
-  HomePage({required this.scrollController, super.key});
+  HomePage(
+      {required this.appBarScrollController,
+      required this.activityListScrollController,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +25,13 @@ class HomePage extends StatelessWidget {
         return Scaffold(
           body: CustomScrollView(
             physics: state is! AppBarWithAllFilters
-                ? const ClampingScrollPhysics()
+                ? const BottomBouncingScrollPhysics()
                 : const NeverScrollableScrollPhysics(),
-            controller: scrollController,
+            controller: activityListScrollController,
+            shrinkWrap: true,
             slivers: <Widget>[
               CustomSliverAppBar(
-                scrollController: scrollController,
+                appBarScrollController: appBarScrollController,
               ),
               SliverToBoxAdapter(
                 child: Stack(
