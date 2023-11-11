@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Theme Data
 final ThemeData appThemeData = ThemeData(
   primarySwatch: tMaterialColorPrimary,
-  fontFamily: 'Roboto-Regular',
+  fontFamily: tTextRegularFont,
   visualDensity: VisualDensity.adaptivePlatformDensity,
 );
 
@@ -73,6 +73,7 @@ const Color tColorDarkGray = Color(0xFF9B9B9B);
 const Color tColorBlack = Color(0xFF000000);
 const Color tColorYellow = Color(0xFFB49B00);
 const Color tColorsTransparent = Colors.transparent;
+const Color tColorRed = Color(0xFFEE3737);
 
 // Material Color
 const MaterialColor tMaterialColorPrimary = MaterialColor(
@@ -91,57 +92,3 @@ const MaterialColor tMaterialColorPrimary = MaterialColor(
   },
 );
 
-const TextStyle tTextStyleHeader1 = TextStyle(
-  fontSize: tFontSizeLarge,
-  color: tColorWhite,
-  fontFamily: tTextBoldFont,
-  height: 1.5,
-);
-
-const TextStyle tTextStyleHeader2 = TextStyle(
-  fontSize: tFontSizeMedium,
-  color: tColorWhite,
-  fontFamily: tTextBoldFont,
-  height: 1,
-);
-
-const TextStyle tTextStyleHeader3 = TextStyle(
-  fontSize: tFontSizeSmall,
-  color: tColorGray,
-  fontFamily: tTextBoldFont,
-  height: 1,
-);
-
-const TextStyle tTextStyleButton = TextStyle(
-  fontSize: tFontSizeButton,
-  fontFamily: tTextBoldFont,
-  height: 1,
-);
-
-const TextStyle tTextStyleFilterIcon = TextStyle(
-  fontSize: tFontSizeFilterIcon,
-  color: tColorWhite,
-  fontFamily: tTextBoldFont,
-  height: 1,
-);
-
-const TextStyle tTextStyleActivityListTileHeader = TextStyle(
-  fontSize: tFontSizeSmall,
-  color: tColorPrimary,
-  fontFamily: tTextBoldFont,
-  height: 1,
-);
-
-const TextStyle tTextStyleActivityListTileSubHeader = TextStyle(
-  fontSize: tFontSizeTiny,
-  color: tColorDarkGray,
-  fontFamily: tTextRegularFont,
-  height: 1,
-);
-
-const TextStyle tTextStyleActivityListTileActivity = TextStyle(
-  fontSize: tFontSizeSmall,
-  color: tColorBlack,
-  fontFamily: tTextBoldFont,
-  height: 1,
-);
