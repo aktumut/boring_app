@@ -1,5 +1,6 @@
 import 'package:boring_app/business_logic/blocs/activity/activity_cubit.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/filter_icon.dart';
+import 'package:boring_app/presentation/widgets/home_page_widgets/participant_text_field.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/price_slider.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class ExtendedFilterIconList extends StatelessWidget {
           vertical: tSpaceHalf, horizontal: tSpaceHalf),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: [PriceSlider(state: state), Expanded(child: TextField())],
+        children: [PriceSlider(state: state), ParticipantTextField()],
       ),
     );
   }

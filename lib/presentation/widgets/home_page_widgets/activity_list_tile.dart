@@ -3,6 +3,7 @@ import 'package:boring_app/data/models/activity_model.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/activity_list_tile_details.dart';
 import 'package:boring_app/utils/activity_type_images.dart';
 import 'package:boring_app/utils/constants.dart';
+import 'package:boring_app/utils/text_style_theme.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

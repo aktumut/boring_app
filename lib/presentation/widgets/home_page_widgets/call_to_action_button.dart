@@ -2,6 +2,7 @@ import 'package:boring_app/business_logic/blocs/activity/activity_cubit.dart';
 import 'package:boring_app/business_logic/blocs/appbar/app_bar_cubit.dart';
 import 'package:boring_app/helpers/determine_app_bar_height.dart';
 import 'package:boring_app/utils/constants.dart';
+import 'package:boring_app/utils/text_style_theme.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

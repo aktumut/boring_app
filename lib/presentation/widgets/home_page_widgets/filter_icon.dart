@@ -1,6 +1,7 @@
 import 'package:boring_app/business_logic/blocs/activity/activity_cubit.dart';
 import 'package:boring_app/helpers/capitalize_first_letter.dart';
 import 'package:boring_app/utils/activity_type_icons.dart';
+import 'package:boring_app/utils/text_style_theme.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
