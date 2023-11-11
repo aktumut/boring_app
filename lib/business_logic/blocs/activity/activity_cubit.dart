@@ -105,4 +105,29 @@ class ActivityCubit extends Cubit<ActivityState> {
       filterActivitiesByPrice(currentSliderValue);
     }
   }
+
+  void filterActivitiesByParticipants(int participantCount) {
+    List<ActivityModel> filteredActivities;
+
+    if (state is ActivityLoaded) {
+      ActivityLoaded currentState = state as ActivityLoaded;
+      if (currentState.selectedFilter != tTextFilterAll) {
+        filteredActivities = _allActivities
+            .where((ActivityModel activity) =>
+                activity.type == currentState.selectedFilter &&
+                activity.participants != null &&
+                activity.participants! >= participantCount)
+            .toList();
+      } else {
+        filteredActivities = _allActivities
+            .where((ActivityModel activity) =>
+                activity.participants != null &&
+                (activity.participants!) >= participantCount)
+            .toList();
+      }
+
+      emit(ActivityLoaded(filteredActivities, currentState.activityTypes,
+          currentState.selectedFilter, currentState.currentSliderValue));
+    }
+  }
 }
