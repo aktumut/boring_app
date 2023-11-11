@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:boring_app/utils/theme.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -9,17 +10,17 @@ part 'app_bar_state.dart';
 /// Manages the state of AppBar based on scroll events and provides animation for AppBar expansion.
 
 class AppBarCubit extends Cubit<AppBarState> {
-  final ScrollController _scrollController;
+  final ScrollController _appBarScrollController;
   Timer? _timer;
 
-  AppBarCubit(this._scrollController) : super(AppBarExpanded()) {
-    _scrollController.addListener(_onScroll);
+  AppBarCubit(this._appBarScrollController) : super(AppBarExpanded()) {
+    _appBarScrollController.addListener(_onScroll);
   }
 
   void _onScroll() {
     final isAppBarExpanded =
-        _scrollController.offset < (tHeightAppBar - kToolbarHeight);
-    emit(isAppBarExpanded ? AppBarExpanded() : AppBarCollapsed());
+        _appBarScrollController.offset < (tHeightAppBar - kToolbarHeight);
+    emit(isAppBarExpanded ? AppBarExpanded() : const AppBarCollapsed());
   }
 
   void expandAppBarWithAllFilters(double finalAppBarHeight) {
@@ -61,8 +62,8 @@ class AppBarCubit extends Cubit<AppBarState> {
   @override
   Future<void> close() async {
     _timer?.cancel();
-    _scrollController.removeListener(_onScroll);
-    _scrollController.dispose();
+    _appBarScrollController.removeListener(_onScroll);
+    _appBarScrollController.dispose();
     return super.close();
   }
 }
