@@ -6,6 +6,7 @@ const String tTextCallToAction = 'Show all filters';
 const String tTextBoldFont = 'Roboto-Bold';
 const String tTextRegularFont = 'Roboto-Regular';
 const String tTextNotFound = 'notFound';
+const String tTextPrice = 'Price';
 
 // Api
 const String tTextBaseUrl = 'http://www.boredapi.com/api';
