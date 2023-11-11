@@ -25,13 +25,17 @@ const double tShapeHeight = 104;
 
 // Appbar
 const double tHeightAppBar = 200;
-const double tHeightMaxAppBar = 512;
-const double tHeightFinalAppBar9to11 = 468;
-const double tHeightFinalAppBar6to8 = 360;
-const double tHeightFinalAppBar3to5 = 256;
-const double tHeightFinalAppBar1to2 = 152;
+const double tHeightMaxAppBar = 560;
+const double tHeightFinalAppBar9to11 = 536;
+const double tHeightFinalAppBar6to8 = 428;
+const double tHeightFinalAppBar3to5 = 328;
+const double tHeightFinalAppBar1to2 = 216;
 const Duration tDurationAppBarAnimation = Duration(milliseconds: 500);
 const int tStepsAppBarAnimation = 100;
+const double tHeightSlider = 28;
+const int tDivSlider = 10;
+const double tMinSlider = 1;
+const double tMaxSlider = 10;
 
 // Activity List Tile
 const double tHeightActivityListTile = 152;
