@@ -6,6 +6,8 @@ class ActivityModel {
   final String? link;
   final String? key;
   final double? accessibility;
+  int likes;
+  bool isLiked;
 
   ActivityModel({
     this.activity,
@@ -15,6 +17,8 @@ class ActivityModel {
     this.link,
     this.key,
     this.accessibility,
+    this.likes = 0,
+    this.isLiked = false,
   });
 
   factory ActivityModel.fromJson(Map<String, dynamic> json) {
