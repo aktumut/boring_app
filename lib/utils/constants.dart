@@ -7,6 +7,7 @@ const String tTextBoldFont = 'Roboto-Bold';
 const String tTextRegularFont = 'Roboto-Regular';
 const String tTextNotFound = 'notFound';
 const String tTextPrice = 'Price';
+const String tTextParticipants = 'Participants';
 
 // Api
 const String tTextBaseUrl = 'http://www.boredapi.com/api';
