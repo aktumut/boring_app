@@ -16,8 +16,8 @@ class ActivityCubit extends Cubit<ActivityState> {
   final ActivityRepository _activityRepository;
   final List<ActivityModel> _allActivities = [];
   List<String> activityTypes = [];
-
   Set<String> activityTypesSet = {tTextFilterAll};
+  double currentSliderValue = 1;
 
   ActivityCubit(this._activityRepository, this.activityListScrollController)
       : super(ActivityLoading()) {
@@ -31,7 +31,8 @@ class ActivityCubit extends Cubit<ActivityState> {
       await _updateActivityLikes();
       activityTypes = activityTypesSet.toList();
 
-      emit(ActivityLoaded(_allActivities, activityTypes, tTextFilterAll));
+      emit(ActivityLoaded(
+          _allActivities, activityTypes, tTextFilterAll, currentSliderValue));
     } catch (exception) {
       emit(ActivityError(exception.toString()));
     }
@@ -57,13 +58,13 @@ class ActivityCubit extends Cubit<ActivityState> {
     List<ActivityModel> filteredActivities = selectedType == tTextFilterAll
         ? _allActivities
         : _allActivities
-        .where((activity) => activity.type == selectedType)
-        .toList();
+            .where((activity) => activity.type == selectedType)
+            .toList();
 
     if (state is ActivityLoaded || state is ActivityLikeUpdate) {
       ActivityLoaded currentState = state as ActivityLoaded;
-      emit(ActivityLoaded(
-          filteredActivities, currentState.activityTypes, selectedType));
+      emit(ActivityLoaded(filteredActivities, currentState.activityTypes,
+          selectedType, currentSliderValue));
     }
   }
 
@@ -71,6 +72,37 @@ class ActivityCubit extends Cubit<ActivityState> {
     if (activityListScrollController.position.pixels ==
         activityListScrollController.position.maxScrollExtent) {
       fetchActivities();
+    }
+  }
+
+  void filterActivitiesByPrice(double price) {
+    List<ActivityModel> filteredActivities;
+
+    if (state is ActivityLoaded) {
+      ActivityLoaded currentState = state as ActivityLoaded;
+      if (currentState.selectedFilter != tTextFilterAll) {
+        filteredActivities = _allActivities
+            .where((ActivityModel activity) =>
+                activity.type == currentState.selectedFilter &&
+                activity.price != null &&
+                activity.price! * 10 >= price)
+            .toList();
+      } else {
+        filteredActivities = _allActivities
+            .where((ActivityModel activity) =>
+                activity.price != null && (activity.price! * 10) >= price)
+            .toList();
+      }
+
+      emit(ActivityLoaded(filteredActivities, currentState.activityTypes,
+          currentState.selectedFilter, price));
+    }
+  }
+
+  void updateSliderValue(double value) {
+    if (state is ActivityLoaded) {
+      currentSliderValue = value;
+      filterActivitiesByPrice(currentSliderValue);
     }
   }
 }
