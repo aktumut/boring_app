@@ -5,29 +5,28 @@ import 'package:boring_app/business_logic/repositories/activity_repository.dart'
 import 'package:boring_app/data/models/activity_model.dart';
 import 'package:boring_app/utils/constants.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'activity_state.dart';
 
 class ActivityCubit extends Cubit<ActivityState> {
+  final ScrollController activityListScrollController;
   final ActivityRepository _activityRepository;
   final List<ActivityModel> _allActivities = [];
   List<String> activityTypes = [];
 
-  ActivityCubit(this._activityRepository) : super(ActivityLoading());
+  Set<String> activityTypesSet = {tTextFilterAll};
+
+  ActivityCubit(this._activityRepository, this.activityListScrollController)
+      : super(ActivityLoading()) {
+    activityListScrollController.addListener(_fetchMoreActivities);
+  }
 
   Future<void> fetchActivities() async {
     try {
-      Set<String> activityTypesSet = {tTextFilterAll};
-      _allActivities.clear();
-
-      for (int i = 0; i < tNumberOfActivities; i++) {
-        ActivityModel activity = await _activityRepository.fetchActivity();
-        activity.likes = math.Random().nextInt(tMaxLikes);
-        _allActivities.add(activity);
-        activityTypesSet.add(activity.type!);
-      }
+      await _fetchAndProcessActivities(activityTypesSet);
 
       await _updateActivityLikes();
       activityTypes = activityTypesSet.toList();
@@ -35,6 +34,15 @@ class ActivityCubit extends Cubit<ActivityState> {
       emit(ActivityLoaded(_allActivities, activityTypes, tTextFilterAll));
     } catch (exception) {
       emit(ActivityError(exception.toString()));
+    }
+  }
+
+  Future<void> _fetchAndProcessActivities(Set<String> activityTypesSet) async {
+    for (int i = 0; i < tNumberOfActivities; i++) {
+      ActivityModel activity = await _activityRepository.fetchActivity();
+      activity.likes = math.Random().nextInt(tMaxLikes);
+      _allActivities.add(activity);
+      activityTypesSet.add(activity.type!);
     }
   }
 
@@ -49,13 +57,20 @@ class ActivityCubit extends Cubit<ActivityState> {
     List<ActivityModel> filteredActivities = selectedType == tTextFilterAll
         ? _allActivities
         : _allActivities
-            .where((activity) => activity.type == selectedType)
-            .toList();
+        .where((activity) => activity.type == selectedType)
+        .toList();
 
     if (state is ActivityLoaded || state is ActivityLikeUpdate) {
       ActivityLoaded currentState = state as ActivityLoaded;
       emit(ActivityLoaded(
           filteredActivities, currentState.activityTypes, selectedType));
+    }
+  }
+
+  void _fetchMoreActivities() {
+    if (activityListScrollController.position.pixels ==
+        activityListScrollController.position.maxScrollExtent) {
+      fetchActivities();
     }
   }
 }
