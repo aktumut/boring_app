@@ -6,7 +6,7 @@ final Map<String, String> activityTypeImages = {
   'social':
       'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHNvY2lhbHxlbnwwfHwwfHx8Mg%3D%3D',
   'diy':
-      '=https://images.unsplash.com/photo-1522065893269-6fd20f6d7438?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGl5fGVufDB8fDB8fHwy',
+      'https://images.unsplash.com/photo-1522065893269-6fd20f6d7438?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZGl5fGVufDB8fDB8fHwy',
   'charity':
       'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Y2hhcml0eXxlbnwwfHwwfHx8Mg%3D%3D',
   'cooking':
