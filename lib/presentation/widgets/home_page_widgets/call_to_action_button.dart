@@ -17,6 +17,7 @@ class CallToActionButton extends StatelessWidget {
       right: tSpaceDoubleHorizontalPadding,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          shadowColor: tColorsTransparent,
           backgroundColor: tColorWhite,
           foregroundColor: tColorPrimary,
           shape: RoundedRectangleBorder(
