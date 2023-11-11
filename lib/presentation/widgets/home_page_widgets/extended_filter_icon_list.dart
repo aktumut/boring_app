@@ -25,15 +25,15 @@ class ExtendedFilterIconList extends StatelessWidget {
     );
   }
 
-  Widget _buildExtendedFilterList(
-      List<String> activityTypes, String selectedFilter, BuildContext context) {
+  Widget _buildExtendedFilterList(List<String> activityTypes,
+      String selectedFilter, BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: tSpaceBase),
       width: double.infinity,
       child: Center(
         child: Wrap(
-          spacing: tSpaceBase, // horizontal space between chips
-          runSpacing: tSpaceBase, // vertical space between lines
+          spacing: tSpaceBase,
+          runSpacing: tSpaceBase,
           children: activityTypes.map((activityType) {
             final bool isSelected = selectedFilter == activityType;
             return FilterIcon(
