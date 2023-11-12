@@ -2,6 +2,15 @@ import 'package:boring_app/utils/constants.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/cupertino.dart';
 
+
+// Font Sizes
+const double tFontSizeTiny = 12;
+const double tFontSizeSmall = 16;
+const double tFontSizeMedium = 24;
+const double tFontSizeLarge = 40;
+const double tFontSizeButton = 20;
+const double tFontSizeFilterIcon = 14;
+
 const TextStyle tTextStyleHeader1 = TextStyle(
   fontSize: tFontSizeLarge,
   color: tColorWhite,
