@@ -1,4 +1,5 @@
 import 'package:boring_app/data/models/activity_model.dart';
+import 'package:boring_app/presentation/pages/activity_details_page.dart';
 import 'package:boring_app/presentation/widgets/fav_icon.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/activity_list_tile_details.dart';
 import 'package:boring_app/presentation/widgets/image_widget.dart';
@@ -12,20 +13,31 @@ class ActivityListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: tSpaceDouble),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(tRadiusCard),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildActivityImageStack(context),
-            ActivityListTileDetails(activity: activity),
-          ],
+    return GestureDetector(
+      child: Padding(
+        padding: const EdgeInsets.only(top: tSpaceDouble),
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(tRadiusCard),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildActivityImageStack(context),
+              ActivityListTileDetails(activity: activity),
+            ],
+          ),
         ),
       ),
+      onTap: () {
+        ActivityDetailsPage(activity: activity);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ActivityDetailsPage(activity: activity),
+          ),
+        );
+      },
     );
   }
 
