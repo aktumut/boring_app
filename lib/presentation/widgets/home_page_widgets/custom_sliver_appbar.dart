@@ -8,10 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
-  final ScrollController appBarScrollController;
-
   const CustomSliverAppBar({
-    required this.appBarScrollController,
     super.key,
   });
 
@@ -30,6 +27,7 @@ class CustomSliverAppBar extends StatelessWidget {
           expandedHeight: state is AppBarWithAllFilters
               ? state.heightAppBarWithFilters
               : tHeightAppBar,
+          // collapsedHeight: 64,
           floating: false,
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
