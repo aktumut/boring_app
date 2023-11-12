@@ -21,15 +21,12 @@ Widget initializeApp() {
   final NetworkProvider networkProvider = NetworkProvider();
   final ActivityRepository activityRepository =
       ActivityRepository(networkProvider);
-  final ScrollController appBarScrollController = ScrollController();
-  final ScrollController activityListScrollController = ScrollController();
+  final ScrollController scrollController = ScrollController();
   final ActivityCubit activityCubit =
-      ActivityCubit(activityRepository, activityListScrollController)
-        ..fetchActivities();
+      ActivityCubit(activityRepository, scrollController)..fetchActivities();
 
   return BoringApp(
+    scrollController: scrollController,
     activityCubit: activityCubit,
-    appBarScrollController: appBarScrollController,
-    activityListScrollController: activityListScrollController,
   );
 }

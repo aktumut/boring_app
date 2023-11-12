@@ -10,13 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
-  ScrollController appBarScrollController;
-  ScrollController activityListScrollController;
+  ScrollController scrollController;
 
-  HomePage(
-      {required this.appBarScrollController,
-      required this.activityListScrollController,
-      super.key});
+  HomePage({required this.scrollController, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +23,10 @@ class HomePage extends StatelessWidget {
             physics: state is! AppBarWithAllFilters
                 ? const BottomBouncingScrollPhysics()
                 : const NeverScrollableScrollPhysics(),
-            controller: activityListScrollController,
+            controller: scrollController,
             shrinkWrap: true,
             slivers: <Widget>[
-              CustomSliverAppBar(
-                appBarScrollController: appBarScrollController,
-              ),
+              const CustomSliverAppBar(),
               SliverToBoxAdapter(
                 child: Stack(
                   clipBehavior: Clip.none,

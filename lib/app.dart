@@ -10,14 +10,12 @@ import 'presentation/pages/home_page.dart';
 
 class BoringApp extends StatelessWidget {
   final ActivityCubit activityCubit;
-  final ScrollController appBarScrollController;
-  final ScrollController activityListScrollController;
+  final ScrollController scrollController;
 
   const BoringApp({
     super.key,
     required this.activityCubit,
-    required this.appBarScrollController,
-    required this.activityListScrollController,
+    required this.scrollController,
   });
 
   @override
@@ -25,7 +23,7 @@ class BoringApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (BuildContext context) => AppBarCubit(appBarScrollController),
+          create: (BuildContext context) => AppBarCubit(scrollController),
         ),
         BlocProvider.value(
           value: activityCubit..fetchActivities(),
@@ -40,8 +38,7 @@ class BoringApp extends StatelessWidget {
         theme: appThemeData,
         debugShowCheckedModeBanner: false,
         home: HomePage(
-          appBarScrollController: appBarScrollController,
-          activityListScrollController: activityListScrollController,
+          scrollController: scrollController,
         ),
       ),
     );

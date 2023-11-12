@@ -1,18 +1,18 @@
 part of 'app_bar_cubit.dart';
 
 abstract class AppBarState extends Equatable {
-  AppBarState();
+  const AppBarState();
 }
 
 class AppBarExpanded extends AppBarState {
-  AppBarExpanded() : super();
+  const AppBarExpanded() : super();
 
   @override
   List<Object> get props => [];
 }
 
 class AppBarCollapsed extends AppBarState {
-  AppBarCollapsed() : super();
+  const AppBarCollapsed() : super();
 
   @override
   List<Object> get props => [];

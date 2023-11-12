@@ -12,16 +12,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'activity_state.dart';
 
 class ActivityCubit extends Cubit<ActivityState> {
-  final ScrollController activityListScrollController;
+  final ScrollController scrollController;
   final ActivityRepository _activityRepository;
   final List<ActivityModel> _allActivities = [];
   List<String> activityTypes = [];
   Set<String> activityTypesSet = {tTextFilterAll};
   double currentSliderValue = 1;
 
-  ActivityCubit(this._activityRepository, this.activityListScrollController)
+  ActivityCubit(this._activityRepository, this.scrollController)
       : super(ActivityLoading()) {
-    activityListScrollController.addListener(_fetchMoreActivities);
+    scrollController.addListener(_fetchMoreActivities);
   }
 
   Future<void> fetchActivities() async {
@@ -69,8 +69,8 @@ class ActivityCubit extends Cubit<ActivityState> {
   }
 
   void _fetchMoreActivities() {
-    if (activityListScrollController.position.pixels ==
-        activityListScrollController.position.maxScrollExtent) {
+    if (scrollController.position.pixels ==
+        scrollController.position.maxScrollExtent) {
       fetchActivities();
     }
   }

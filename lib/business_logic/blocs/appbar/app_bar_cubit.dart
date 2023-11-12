@@ -10,21 +10,23 @@ part 'app_bar_state.dart';
 /// Manages the state of AppBar based on scroll events and provides animation for AppBar expansion.
 
 class AppBarCubit extends Cubit<AppBarState> {
-  final ScrollController _appBarScrollController;
+  final ScrollController _scrollController;
+
   Timer? _timer;
 
-  AppBarCubit(this._appBarScrollController) : super(AppBarExpanded()) {
-    _appBarScrollController.addListener(_onScroll);
+  AppBarCubit(this._scrollController) : super(const AppBarExpanded()) {
+    _scrollController.addListener(_onScroll);
   }
 
   void _onScroll() {
     final isAppBarExpanded =
-        _appBarScrollController.offset < (tHeightAppBar - kToolbarHeight);
-    emit(isAppBarExpanded ? AppBarExpanded() : const AppBarCollapsed());
+        _scrollController.offset < (tHeightAppBar - kToolbarHeight);
+
+    emit(isAppBarExpanded ? const AppBarExpanded() : const AppBarCollapsed());
   }
 
   void expandAppBarWithAllFilters(double finalAppBarHeight) {
-    final stepTime =
+    final double stepTime =
         tDurationAppBarAnimation.inMilliseconds / tStepsAppBarAnimation;
     int currentStep = 0;
 
@@ -56,14 +58,14 @@ class AppBarCubit extends Cubit<AppBarState> {
   }
 
   void resetAppBar() {
-    emit(AppBarExpanded());
+    emit(const AppBarExpanded());
   }
 
   @override
   Future<void> close() async {
     _timer?.cancel();
-    _appBarScrollController.removeListener(_onScroll);
-    _appBarScrollController.dispose();
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
     return super.close();
   }
 }
