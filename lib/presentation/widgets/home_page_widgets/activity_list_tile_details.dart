@@ -1,9 +1,9 @@
 import 'package:boring_app/data/models/activity_model.dart';
 import 'package:boring_app/helpers/capitalize_first_letter.dart';
-import 'package:boring_app/helpers/color_based_on_price.dart';
 import 'package:boring_app/helpers/format_accessibility.dart';
 import 'package:boring_app/helpers/format_activity_text.dart';
 import 'package:boring_app/helpers/format_price.dart';
+import 'package:boring_app/helpers/get_color_based_on_info.dart';
 import 'package:boring_app/utils/constants.dart';
 import 'package:boring_app/utils/text_style_theme.dart';
 import 'package:boring_app/utils/theme.dart';
@@ -58,7 +58,7 @@ class ActivityListTileDetails extends StatelessWidget {
         const Icon(Icons.person,
             size: tSizeActivityListTileIcon, color: tColorDarkGray),
         Text(
-          '${activity.participants.toString()} | accessiblity: ${formatAccessibility(activity.accessibility!)}/10',
+          '${activity.participants.toString()} | $tTextAccessibility: ${formatAccessibility(activity.accessibility!)}/10',
           style: tTextStyleActivityListTileSubHeader,
         ),
       ],
@@ -70,7 +70,7 @@ class ActivityListTileDetails extends StatelessWidget {
       children: [
         Icon(Icons.euro,
             size: tSizeActivityListTilePriceIcon,
-            color: getColorBasedOnPrice(activity.price!)),
+            color: getColorBasedOnInfo(activity.price!)),
         const SizedBox(height: tSpaceHalf),
         Text(
           formatPriceText(activity.price!),
