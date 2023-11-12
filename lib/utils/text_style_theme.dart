@@ -2,9 +2,9 @@ import 'package:boring_app/utils/constants.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/cupertino.dart';
 
-
 // Font Sizes
 const double tFontSizeTiny = 12;
+const double tFontSizeRegular = 14;
 const double tFontSizeSmall = 16;
 const double tFontSizeMedium = 24;
 const double tFontSizeLarge = 40;
@@ -32,7 +32,14 @@ const TextStyle tTextStyleHeader3 = TextStyle(
   height: 1,
 );
 
-const TextStyle tTextStyleButton = TextStyle(
+const TextStyle tTextStyleRegular = TextStyle(
+  fontSize: tFontSizeRegular,
+  color: tColorBlack,
+  fontFamily: tTextRegularFont,
+  height: 1,
+);
+
+const TextStyle tTextStyleRegular2 = TextStyle(
   fontSize: tFontSizeButton,
   fontFamily: tTextBoldFont,
   height: 1,
