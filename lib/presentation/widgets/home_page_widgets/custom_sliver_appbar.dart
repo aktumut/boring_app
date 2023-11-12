@@ -1,5 +1,5 @@
 import 'package:boring_app/business_logic/blocs/appbar/app_bar_cubit.dart';
-import 'package:boring_app/presentation/widgets/home_page_widgets/extended_filter_icon_list.dart';
+import 'package:boring_app/presentation/widgets/home_page_widgets/extended_filter_list.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/filter_icon_list.dart';
 import 'package:boring_app/utils/constants.dart';
 import 'package:boring_app/utils/text_style_theme.dart';
@@ -74,7 +74,7 @@ class CustomSliverAppBar extends StatelessWidget {
       child: Center(
         child: Padding(
           padding: EdgeInsets.only(top: tSpaceDoubleVerticalPadding),
-          child: ExtendedFilterIconList(),
+          child: ExtendedFilterList(),
         ),
       ),
     );

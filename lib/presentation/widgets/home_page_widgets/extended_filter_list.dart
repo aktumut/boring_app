@@ -6,8 +6,8 @@ import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ExtendedFilterIconList extends StatelessWidget {
-  const ExtendedFilterIconList({super.key});
+class ExtendedFilterList extends StatelessWidget {
+  const ExtendedFilterList({super.key});
 
   @override
   Widget build(BuildContext context) {
