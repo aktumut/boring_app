@@ -20,17 +20,13 @@ class ImageWidget extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: activityTypeImages[activity.type] ??
           activityTypeImages[tTextNotFound]!,
-      height: tHeightActivityListTile,
+      height: !isShadow ? tHeightActivityListTile : tHeightFilteredImage,
       width: double.infinity,
       fit: BoxFit.cover,
       imageBuilder:
           (BuildContext context, ImageProvider<Object> imageProvider) =>
               Container(
         decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(tRadiusCard),
-            topRight: Radius.circular(tRadiusCard),
-          ),
           image: DecorationImage(
             image: imageProvider,
             fit: BoxFit.cover,
