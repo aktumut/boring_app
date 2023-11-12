@@ -13,32 +13,42 @@ class ParticipantTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: TextField(
-        keyboardType: TextInputType.number,
-        onSubmitted: (value) {
-          final int? participantCount = int.tryParse(value);
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(tTextParticipants, style: tTextStyleFilterWidgets),
+          Expanded(
+            child: TextField(
+              keyboardType: TextInputType.number,
+              onSubmitted: (value) {
+                final int? participantCount = int.tryParse(value);
 
-          if (participantCount != null) {
-            context
-                .read<ActivityCubit>()
-                .filterActivitiesByParticipants(participantCount);
-          }
-        },
-        style: tTextStyleHeader2,
-        decoration: const InputDecoration(
-          contentPadding: EdgeInsets.all(tSpaceHalf),
-          hintText: tTextParticipants,
-          hintStyle: tTextStyleFilterIcon,
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: tColorLightGray, width: tSpaceEighth),
+                if (participantCount != null) {
+                  context
+                      .read<ActivityCubit>()
+                      .filterActivitiesByParticipants(participantCount);
+                }
+              },
+              style: tTextStyleHeader2,
+              textAlign: TextAlign.center,
+              decoration: const InputDecoration(
+                contentPadding: EdgeInsets.all(tSpaceHalf),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide:
+                      BorderSide(color: tColorLightGray, width: tSpaceEighth),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide:
+                      BorderSide(color: tColorWhite, width: tSpaceQuarter),
+                ),
+                focusedErrorBorder: UnderlineInputBorder(
+                  borderSide:
+                      BorderSide(color: tColorRed, width: tSpaceQuarter),
+                ),
+              ),
+            ),
           ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: tColorWhite, width: tSpaceQuarter),
-          ),
-          focusedErrorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: tColorRed, width: tSpaceQuarter),
-          ),
-        ),
+        ],
       ),
     );
   }
