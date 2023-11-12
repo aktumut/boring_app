@@ -116,13 +116,13 @@ class ActivityCubit extends Cubit<ActivityState> {
             .where((ActivityModel activity) =>
                 activity.type == currentState.selectedFilter &&
                 activity.participants != null &&
-                activity.participants! >= participantCount)
+                activity.participants! == participantCount)
             .toList();
       } else {
         filteredActivities = _allActivities
             .where((ActivityModel activity) =>
                 activity.participants != null &&
-                (activity.participants!) >= participantCount)
+                (activity.participants!) == participantCount)
             .toList();
       }
 
