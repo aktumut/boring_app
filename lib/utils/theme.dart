@@ -42,6 +42,11 @@ const double tSizeIconAppBar = 32;
 const double tOpacityImage = 0.6;
 const double tHeightFilteredImage = 224;
 
+// Information Widget
+const double tHeightInformationWidget = 88;
+const double tWidthInformationWidget = 152;
+const double tRadiusInformationWidget = 8;
+
 // Activity List Tile
 const double tHeightActivityListTile = 152;
 const double tSizeActivityListTileIcon = 16;
@@ -68,7 +73,7 @@ const Color tColorLightGray = Color(0xFFE6EFF1);
 const Color tColorGray = Color(0xFFE7E7E6);
 const Color tColorDarkGray = Color(0xFF9B9B9B);
 const Color tColorBlack = Color(0xFF000000);
-const Color tColorYellow = Color(0xFFB49B00);
+const Color tColorYellow = Color(0xFFF3BD69);
 const Color tColorsTransparent = Colors.transparent;
 const Color tColorRed = Color(0xFFEE3737);
 
