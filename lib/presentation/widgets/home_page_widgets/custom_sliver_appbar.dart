@@ -27,7 +27,6 @@ class CustomSliverAppBar extends StatelessWidget {
           expandedHeight: state is AppBarWithAllFilters
               ? state.heightAppBarWithFilters
               : tHeightAppBar,
-          // collapsedHeight: 64,
           floating: false,
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
