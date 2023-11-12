@@ -3,11 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i3;
+import 'dart:async' as _i5;
 
+import 'package:boring_app/business_logic/blocs/activity/activity_cubit.dart'
+    as _i4;
 import 'package:boring_app/business_logic/blocs/appbar/app_bar_cubit.dart'
     as _i2;
-import 'package:flutter_bloc/flutter_bloc.dart' as _i4;
+import 'package:flutter/material.dart' as _i3;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -23,6 +26,27 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeAppBarState_0 extends _i1.SmartFake implements _i2.AppBarState {
   _FakeAppBarState_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeScrollController_1 extends _i1.SmartFake
+    implements _i3.ScrollController {
+  _FakeScrollController_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeActivityState_2 extends _i1.SmartFake implements _i4.ActivityState {
+  _FakeActivityState_2(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -49,10 +73,10 @@ class MockAppBarCubit extends _i1.Mock implements _i2.AppBarCubit {
       ) as _i2.AppBarState);
 
   @override
-  _i3.Stream<_i2.AppBarState> get stream => (super.noSuchMethod(
+  _i5.Stream<_i2.AppBarState> get stream => (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue: _i3.Stream<_i2.AppBarState>.empty(),
-      ) as _i3.Stream<_i2.AppBarState>);
+        returnValue: _i5.Stream<_i2.AppBarState>.empty(),
+      ) as _i5.Stream<_i2.AppBarState>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -80,14 +104,14 @@ class MockAppBarCubit extends _i1.Mock implements _i2.AppBarCubit {
       );
 
   @override
-  _i3.Future<void> close() => (super.noSuchMethod(
+  _i5.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
   void emit(_i2.AppBarState? state) => super.noSuchMethod(
@@ -99,7 +123,7 @@ class MockAppBarCubit extends _i1.Mock implements _i2.AppBarCubit {
       );
 
   @override
-  void onChange(_i4.Change<_i2.AppBarState>? change) => super.noSuchMethod(
+  void onChange(_i6.Change<_i2.AppBarState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
           [change],
@@ -138,4 +162,195 @@ class MockAppBarCubit extends _i1.Mock implements _i2.AppBarCubit {
         ),
         returnValueForMissingStub: null,
       );
+}
+
+/// A class which mocks [ActivityCubit].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockActivityCubit extends _i1.Mock implements _i4.ActivityCubit {
+  MockActivityCubit() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.ScrollController get scrollController => (super.noSuchMethod(
+        Invocation.getter(#scrollController),
+        returnValue: _FakeScrollController_1(
+          this,
+          Invocation.getter(#scrollController),
+        ),
+      ) as _i3.ScrollController);
+
+  @override
+  List<String> get activityTypes => (super.noSuchMethod(
+        Invocation.getter(#activityTypes),
+        returnValue: <String>[],
+      ) as List<String>);
+
+  @override
+  set activityTypes(List<String>? _activityTypes) => super.noSuchMethod(
+        Invocation.setter(
+          #activityTypes,
+          _activityTypes,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  Set<String> get activityTypesSet => (super.noSuchMethod(
+        Invocation.getter(#activityTypesSet),
+        returnValue: <String>{},
+      ) as Set<String>);
+
+  @override
+  set activityTypesSet(Set<String>? _activityTypesSet) => super.noSuchMethod(
+        Invocation.setter(
+          #activityTypesSet,
+          _activityTypesSet,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  double get currentSliderValue => (super.noSuchMethod(
+        Invocation.getter(#currentSliderValue),
+        returnValue: 0.0,
+      ) as double);
+
+  @override
+  set currentSliderValue(double? _currentSliderValue) => super.noSuchMethod(
+        Invocation.setter(
+          #currentSliderValue,
+          _currentSliderValue,
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i4.ActivityState get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeActivityState_2(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i4.ActivityState);
+
+  @override
+  _i5.Stream<_i4.ActivityState> get stream => (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _i5.Stream<_i4.ActivityState>.empty(),
+      ) as _i5.Stream<_i4.ActivityState>);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  _i5.Future<void> fetchActivities() => (super.noSuchMethod(
+        Invocation.method(
+          #fetchActivities,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void filterActivities(String? selectedType) => super.noSuchMethod(
+        Invocation.method(
+          #filterActivities,
+          [selectedType],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void filterActivitiesByPrice(double? price) => super.noSuchMethod(
+        Invocation.method(
+          #filterActivitiesByPrice,
+          [price],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void updateSliderValue(double? value) => super.noSuchMethod(
+        Invocation.method(
+          #updateSliderValue,
+          [value],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void filterActivitiesByParticipants(int? participantCount) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #filterActivitiesByParticipants,
+          [participantCount],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i4.ActivityState? state) => super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onChange(_i6.Change<_i4.ActivityState>? change) => super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 }
