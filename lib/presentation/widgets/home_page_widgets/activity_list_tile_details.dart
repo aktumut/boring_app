@@ -4,6 +4,7 @@ import 'package:boring_app/helpers/color_based_on_price.dart';
 import 'package:boring_app/helpers/format_accessibility.dart';
 import 'package:boring_app/helpers/format_activity_text.dart';
 import 'package:boring_app/helpers/format_price.dart';
+import 'package:boring_app/utils/constants.dart';
 import 'package:boring_app/utils/text_style_theme.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class ActivityListTileDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: tSpaceBase),
-        Text(capitalizeFirstLetter(activity.type ?? 'Random activity'),
+        Text(capitalizeFirstLetter(activity.type ?? tTextRandomActivity),
             style: tTextStyleActivityListTileHeader),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: tSpaceQuarter),
@@ -41,7 +42,7 @@ class ActivityListTileDetails extends StatelessWidget {
         ),
         const SizedBox(height: tSpaceHalf),
         Text(
-          formatActivityText(activity.activity ?? 'Random activity'),
+          formatActivityText(activity.activity ?? tTextRandomActivity),
           style: tTextStyleActivityListTileActivity,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
