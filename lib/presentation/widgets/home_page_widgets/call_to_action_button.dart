@@ -12,27 +12,31 @@ class CallToActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: tSpace,
-      left: tSpaceDoubleHorizontalPadding,
-      right: tSpaceDoubleHorizontalPadding,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          shadowColor: tColorsTransparent,
-          backgroundColor: tColorWhite,
-          foregroundColor: tColorPrimary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(tRadiusButton),
+    return BlocBuilder<ActivityCubit, ActivityState>(
+      builder: (context, state) {
+        return Positioned(
+          top: tSpace,
+          left: tSpaceDoubleHorizontalPadding,
+          right: tSpaceDoubleHorizontalPadding,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shadowColor: tColorsTransparent,
+              backgroundColor: tColorWhite,
+              foregroundColor: tColorPrimary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(tRadiusButton),
+              ),
+            ),
+            onPressed: () {
+              _handleButtonPress(context);
+            },
+            child: const Text(
+              tTextCallToAction,
+              style: tTextStyleRegular2,
+            ),
           ),
-        ),
-        onPressed: () {
-          _handleButtonPress(context);
-        },
-        child: const Text(
-          tTextCallToAction,
-          style: tTextStyleRegular2,
-        ),
-      ),
+        );
+      },
     );
   }
 
