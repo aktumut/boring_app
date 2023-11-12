@@ -32,7 +32,7 @@ const double tHeightFinalAppBar3to5 = 328;
 const double tHeightFinalAppBar1to2 = 216;
 const Duration tDurationAppBarAnimation = Duration(milliseconds: 500);
 const int tStepsAppBarAnimation = 100;
-const double tHeightSlider = 28;
+const double tHeightSliderParticipantField = 28;
 const int tDivSlider = 10;
 const double tMinSlider = 1;
 const double tMaxSlider = 10;
@@ -91,4 +91,3 @@ const MaterialColor tMaterialColorPrimary = MaterialColor(
     900: Color(0xFFFDB269),
   },
 );
-
