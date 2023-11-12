@@ -36,6 +36,11 @@ const double tHeightSliderParticipantField = 28;
 const int tDivSlider = 10;
 const double tMinSlider = 1;
 const double tMaxSlider = 10;
+const double tSizeIconAppBar = 32;
+
+// Image
+const double tOpacityImage = 0.6;
+const double tHeightFilteredImage = 224;
 
 // Activity List Tile
 const double tHeightActivityListTile = 152;
@@ -55,14 +60,6 @@ const double tWidthFilterWidget = 96;
 const double tRadiusFilterWidget = 16;
 const double tWidthBorderFilterWidget = 4;
 const double tSizeIconFilterWidget = 48;
-
-// Font Sizes
-const double tFontSizeTiny = 12;
-const double tFontSizeSmall = 16;
-const double tFontSizeMedium = 24;
-const double tFontSizeLarge = 40;
-const double tFontSizeButton = 20;
-const double tFontSizeFilterIcon = 14;
 
 // Colors
 const Color tColorPrimary = Color(0xFFFE7B20);
