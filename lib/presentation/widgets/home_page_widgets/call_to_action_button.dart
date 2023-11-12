@@ -30,7 +30,7 @@ class CallToActionButton extends StatelessWidget {
         },
         child: const Text(
           tTextCallToAction,
-          style: tTextStyleButton,
+          style: tTextStyleRegular2,
         ),
       ),
     );
