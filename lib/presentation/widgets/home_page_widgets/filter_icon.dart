@@ -43,7 +43,7 @@ class FilterIcon extends StatelessWidget {
             const SizedBox(height: tSpaceHalf),
             Text(
               capitalizeFirstLetter(activityType),
-              style: tTextStyleFilterIcon.copyWith(
+              style: tTextStyleFilterWidgets.copyWith(
                 color: isSelected ? tColorPrimary : tColorWhite,
               ),
             ),

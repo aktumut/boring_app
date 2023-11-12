@@ -1,5 +1,3 @@
-
-
 import 'package:boring_app/utils/constants.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,7 +8,6 @@ const TextStyle tTextStyleHeader1 = TextStyle(
   fontFamily: tTextBoldFont,
   height: 1.5,
 );
-
 
 const TextStyle tTextStyleHeader2 = TextStyle(
   fontSize: tFontSizeMedium,
@@ -32,7 +29,7 @@ const TextStyle tTextStyleButton = TextStyle(
   height: 1,
 );
 
-const TextStyle tTextStyleFilterIcon = TextStyle(
+const TextStyle tTextStyleFilterWidgets = TextStyle(
   fontSize: tFontSizeFilterIcon,
   color: tColorWhite,
   fontFamily: tTextBoldFont,
