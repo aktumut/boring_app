@@ -37,8 +37,12 @@ class ExtendedFilterList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           vertical: tSpaceHalf, horizontal: tSpaceHalf),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [PriceSlider(state: state), ParticipantTextField()],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        textBaseline: TextBaseline.alphabetic,
+        children: [
+          PriceSlider(state: state),
+          const ParticipantTextField(),
+        ],
       ),
     );
   }
