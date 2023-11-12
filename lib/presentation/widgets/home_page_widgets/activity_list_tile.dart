@@ -1,13 +1,9 @@
-import 'package:boring_app/business_logic/blocs/activity_like/activity_like_cubit.dart';
 import 'package:boring_app/data/models/activity_model.dart';
+import 'package:boring_app/presentation/widgets/fav_icon.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/activity_list_tile_details.dart';
-import 'package:boring_app/utils/activity_type_images.dart';
-import 'package:boring_app/utils/constants.dart';
-import 'package:boring_app/utils/text_style_theme.dart';
+import 'package:boring_app/presentation/widgets/image_widget.dart';
 import 'package:boring_app/utils/theme.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ActivityListTile extends StatelessWidget {
   final ActivityModel activity;
@@ -41,36 +37,12 @@ class ActivityListTile extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          CachedNetworkImage(
-            imageUrl: activityTypeImages[activity.type] ??
-                activityTypeImages[tTextNotFound]!,
-            height: tHeightActivityListTile,
-            width: double.infinity,
-            fit: BoxFit.cover,
+          ImageWidget(
+            activity: activity,
+            isShadow: false,
           ),
-          BlocBuilder<ActivityLikeCubit, ActivityLikeState>(
-            builder: (context, state) {
-              return Positioned(
-                right: tSpaceDouble,
-                bottom: tSpaceBase,
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      child: Icon(
-                          activity.isLiked
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          color: tColorWhite,
-                          size: tSizeActivityListTileFavoriIcon),
-                      onTap: () {
-                        context.read<ActivityLikeCubit>().toggleLike(activity);
-                      },
-                    ),
-                    Text(activity.likes.toString(), style: tTextStyleHeader2),
-                  ],
-                ),
-              );
-            },
+          FavIcon(
+            activity: activity,
           ),
         ],
       ),
