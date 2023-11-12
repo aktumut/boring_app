@@ -1,13 +1,14 @@
 import 'package:boring_app/business_logic/blocs/activity/activity_cubit.dart';
 import 'package:boring_app/utils/constants.dart';
+import 'package:boring_app/utils/text_style_theme.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PriceSlider extends StatelessWidget {
-  ActivityLoaded state;
+  final ActivityLoaded state;
 
-  PriceSlider({
+  const PriceSlider({
     super.key,
     required this.state,
   });
@@ -18,16 +19,17 @@ class PriceSlider extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: tSpaceDouble),
-            child: Text(
+          Container(
+            height: tHeightSliderParticipantField,
+            padding: const EdgeInsets.symmetric(horizontal: tSpaceDouble),
+            child: const Text(
               tTextPrice,
-              style: tTextStyleFilterIcon,
+              style: tTextStyleFilterWidgets,
             ),
           ),
           Container(
-            height: tHeightSlider,
-            padding: const EdgeInsets.symmetric(vertical: tSpaceHalf),
+            height: tHeightSliderParticipantField,
+            padding: const EdgeInsets.symmetric(horizontal: tSpaceHalf),
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 valueIndicatorColor: tColorWhite,
