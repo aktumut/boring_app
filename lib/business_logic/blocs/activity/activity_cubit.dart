@@ -85,12 +85,12 @@ class ActivityCubit extends Cubit<ActivityState> {
             .where((ActivityModel activity) =>
                 activity.type == currentState.selectedFilter &&
                 activity.price != null &&
-                activity.price! * 10 >= price)
+                activity.price! * 10 <= price)
             .toList();
       } else {
         filteredActivities = _allActivities
             .where((ActivityModel activity) =>
-                activity.price != null && (activity.price! * 10) >= price)
+                activity.price != null && (activity.price! * 10) <= price)
             .toList();
       }
 
