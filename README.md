@@ -27,10 +27,8 @@ dependencies:
   dio: ^5.3.3
   shared_preferences: ^2.2.2
   cached_network_image: ^3.3.0
-  english_words: ^4.0.0
   bloc_test: ^9.1.5
   mockito: ^5.4.2
-  flutter_lints: ^2.0.0
   build_runner: ^2.4.6
 ```
 
