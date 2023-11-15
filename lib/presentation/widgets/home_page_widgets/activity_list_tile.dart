@@ -30,7 +30,6 @@ class ActivityListTile extends StatelessWidget {
         ),
       ),
       onTap: () {
-        ActivityDetailsPage(activity: activity);
         Navigator.push(
           context,
           MaterialPageRoute(
