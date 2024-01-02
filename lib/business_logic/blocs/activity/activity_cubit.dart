@@ -11,19 +11,35 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'activity_state.dart';
 
+/// Manages the state of activities in the application.
 class ActivityCubit extends Cubit<ActivityState> {
-  final ScrollController scrollController;
-  final ActivityRepository _activityRepository;
-  final List<ActivityModel> _allActivities = [];
-  List<String> activityTypes = [];
-  Set<String> activityTypesSet = {tTextFilterAll};
-  double currentSliderValue = 1;
-
+  /// Creates an instance of `ActivityCubit` with a given [ActivityRepository].
+  ///
+  /// The [scrollController] is used to listen for scroll events to fetch more.
   ActivityCubit(this._activityRepository, this.scrollController)
       : super(ActivityLoading()) {
     scrollController.addListener(_fetchMoreActivities);
   }
 
+  /// Controls the scroll position for activities.
+  final ScrollController scrollController;
+
+  /// Repository for fetching activity data.
+  final ActivityRepository _activityRepository;
+
+  /// A cache of all fetched activities.
+  final List<ActivityModel> _allActivities = [];
+
+  /// List of activity types available for filtering.
+  List<String> activityTypes = [];
+
+  /// A set of activity types used for filtering, initialized with 'All'.
+  Set<String> activityTypesSet = {tTextFilterAll};
+
+  /// The current value of the price filter slider.
+  double currentSliderValue = 1;
+
+  /// Fetches activities and handles the state accordingly.
   Future<void> fetchActivities() async {
     try {
       await _fetchAndProcessActivities(activityTypesSet);
@@ -31,16 +47,22 @@ class ActivityCubit extends Cubit<ActivityState> {
       await _updateActivityLikes();
       activityTypes = activityTypesSet.toList();
 
-      emit(ActivityLoaded(
-          _allActivities, activityTypes, tTextFilterAll, currentSliderValue));
+      emit(
+        ActivityLoaded(
+          _allActivities,
+          activityTypes,
+          tTextFilterAll,
+          currentSliderValue,
+        ),
+      );
     } catch (exception) {
       emit(ActivityError(exception.toString()));
     }
   }
 
   Future<void> _fetchAndProcessActivities(Set<String> activityTypesSet) async {
-    for (int i = 0; i < tNumberOfActivities; i++) {
-      ActivityModel activity = await _activityRepository.fetchActivity();
+    for (var i = 0; i < tNumberOfActivities; i++) {
+      final activity = await _activityRepository.fetchActivity();
       activity.likes = math.Random().nextInt(tMaxLikes);
       _allActivities.add(activity);
       activityTypesSet.add(activity.type!);
@@ -48,23 +70,30 @@ class ActivityCubit extends Cubit<ActivityState> {
   }
 
   Future<void> _updateActivityLikes() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    for (var activity in _allActivities) {
+    final prefs = await SharedPreferences.getInstance();
+    for (final activity in _allActivities) {
       activity.isLiked = prefs.getBool(activity.key!) ?? false;
     }
   }
 
+  /// Filters activities by the given [selectedType].
   void filterActivities(String selectedType) {
-    List<ActivityModel> filteredActivities = selectedType == tTextFilterAll
+    final filteredActivities = selectedType == tTextFilterAll
         ? _allActivities
         : _allActivities
-            .where((activity) => activity.type == selectedType)
+            .where((ActivityModel activity) => activity.type == selectedType)
             .toList();
 
     if (state is ActivityLoaded || state is ActivityLikeUpdate) {
-      ActivityLoaded currentState = state as ActivityLoaded;
-      emit(ActivityLoaded(filteredActivities, currentState.activityTypes,
-          selectedType, currentSliderValue));
+      final currentState = state as ActivityLoaded;
+      emit(
+        ActivityLoaded(
+          filteredActivities,
+          currentState.activityTypes,
+          selectedType,
+          currentSliderValue,
+        ),
+      );
     }
   }
 
@@ -75,30 +104,42 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
   }
 
+  /// Filters activities by the given [price].
   void filterActivitiesByPrice(double price) {
     List<ActivityModel> filteredActivities;
 
     if (state is ActivityLoaded) {
-      ActivityLoaded currentState = state as ActivityLoaded;
+      final currentState = state as ActivityLoaded;
       if (currentState.selectedFilter != tTextFilterAll) {
         filteredActivities = _allActivities
-            .where((ActivityModel activity) =>
-                activity.type == currentState.selectedFilter &&
-                activity.price != null &&
-                activity.price! * 10 <= price)
+            .where(
+              (ActivityModel activity) =>
+                  activity.type == currentState.selectedFilter &&
+                  activity.price != null &&
+                  activity.price! * 10 <= price,
+            )
             .toList();
       } else {
         filteredActivities = _allActivities
-            .where((ActivityModel activity) =>
-                activity.price != null && (activity.price! * 10) <= price)
+            .where(
+              (ActivityModel activity) =>
+                  activity.price != null && (activity.price! * 10) <= price,
+            )
             .toList();
       }
 
-      emit(ActivityLoaded(filteredActivities, currentState.activityTypes,
-          currentState.selectedFilter, price));
+      emit(
+        ActivityLoaded(
+          filteredActivities,
+          currentState.activityTypes,
+          currentState.selectedFilter,
+          price,
+        ),
+      );
     }
   }
 
+  /// Updates the slider value for price filtering and emits a new state.
   void updateSliderValue(double value) {
     if (state is ActivityLoaded) {
       currentSliderValue = value;
@@ -106,28 +147,39 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
   }
 
+  /// Filters activities by the number of [participantCount].
   void filterActivitiesByParticipants(int participantCount) {
     List<ActivityModel> filteredActivities;
 
     if (state is ActivityLoaded) {
-      ActivityLoaded currentState = state as ActivityLoaded;
+      final currentState = state as ActivityLoaded;
       if (currentState.selectedFilter != tTextFilterAll) {
         filteredActivities = _allActivities
-            .where((ActivityModel activity) =>
-                activity.type == currentState.selectedFilter &&
-                activity.participants != null &&
-                activity.participants! == participantCount)
+            .where(
+              (ActivityModel activity) =>
+                  activity.type == currentState.selectedFilter &&
+                  activity.participants != null &&
+                  activity.participants! == participantCount,
+            )
             .toList();
       } else {
         filteredActivities = _allActivities
-            .where((ActivityModel activity) =>
-                activity.participants != null &&
-                (activity.participants!) == participantCount)
+            .where(
+              (ActivityModel activity) =>
+                  activity.participants != null &&
+                  (activity.participants!) == participantCount,
+            )
             .toList();
       }
 
-      emit(ActivityLoaded(filteredActivities, currentState.activityTypes,
-          currentState.selectedFilter, currentState.currentSliderValue));
+      emit(
+        ActivityLoaded(
+          filteredActivities,
+          currentState.activityTypes,
+          currentState.selectedFilter,
+          currentState.currentSliderValue,
+        ),
+      );
     }
   }
 }
