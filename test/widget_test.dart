@@ -26,7 +26,8 @@ void main() {
       mockAppBarCubit = MockAppBarCubit();
       mockActivityCubit = MockActivityCubit();
       when(mockActivityCubit.activityTypes).thenReturn(
-          ['ActivityType1', 'ActivityType2']); // Provide appropriate values
+        ['ActivityType1', 'ActivityType2'],
+      ); // Provide appropriate values
 
       appBarStateController = StreamController<AppBarState>.broadcast();
       activityStateController = StreamController<ActivityState>.broadcast();
@@ -39,19 +40,26 @@ void main() {
 
       // Stub the state getter
       when(mockAppBarCubit.state).thenReturn(const AppBarExpanded());
-      when(mockActivityCubit.state).thenReturn(ActivityLoaded([
-        ActivityModel(
-          activity: "activity",
-          type: "type",
-          participants: 1,
-          price: 0.1,
-          link: "link",
-          key: "key",
-          accessibility: 0.1,
+      when(mockActivityCubit.state).thenReturn(
+        const ActivityLoaded(
+          [
+            ActivityModel(
+              activity: 'activity',
+              type: 'type',
+              participants: 1,
+              price: 0.1,
+              link: 'link',
+              key: 'key',
+              accessibility: 0.1,
+            ),
+          ],
+          [
+            'type',
+          ],
+          tTextFilterAll,
+          1,
         ),
-      ], const [
-        'type'
-      ], tTextFilterAll, 1)); // Provide appropriate state
+      ); // Provide appropriate state
     });
 
     tearDown(() {
@@ -69,7 +77,8 @@ void main() {
             providers: [
               BlocProvider<AppBarCubit>(create: (context) => mockAppBarCubit),
               BlocProvider<ActivityCubit>(
-                  create: (context) => mockActivityCubit),
+                create: (context) => mockActivityCubit,
+              ),
             ],
             child: const Stack(
               children: [
