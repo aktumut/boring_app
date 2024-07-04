@@ -13,7 +13,7 @@ class CallToActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ActivityCubit, ActivityState>(
-      builder: (context, state) {
+      builder: (BuildContext context, ActivityState istate) {
         return Positioned(
           top: tSpace,
           left: tSpaceDoubleHorizontalPadding,
@@ -24,7 +24,9 @@ class CallToActionButton extends StatelessWidget {
               backgroundColor: tColorWhite,
               foregroundColor: tColorPrimary,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(tRadiusButton),
+                borderRadius: BorderRadius.circular(
+                  tRadiusButton,
+                ),
               ),
             ),
             onPressed: () {
