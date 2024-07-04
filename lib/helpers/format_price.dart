@@ -1,5 +1,5 @@
 String formatPriceText(double price) {
-  int priceInt = (price * 10).toInt();
+  final priceInt = (price * 10).toInt();
   if (price == 0) {
     return 'Free!';
   } else if (priceInt < 1) {
