@@ -21,7 +21,7 @@ class ParticipantTextField extends StatelessWidget {
             child: TextField(
               keyboardType: TextInputType.number,
               onSubmitted: (value) {
-                final int? participantCount = int.tryParse(value);
+                final participantCount = int.tryParse(value);
 
                 if (participantCount != null) {
                   context
@@ -34,8 +34,7 @@ class ParticipantTextField extends StatelessWidget {
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.all(tSpaceHalf),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide:
-                      BorderSide(color: tColorLightGray, width: tSpaceEighth),
+                  borderSide: BorderSide(color: tColorLightGray),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderSide:
