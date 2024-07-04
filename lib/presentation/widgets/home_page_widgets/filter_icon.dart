@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FilterIcon extends StatelessWidget {
-  final String activityType;
-  final bool isSelected;
-
   const FilterIcon({
-    Key? key,
     required this.activityType,
     required this.isSelected,
-  }) : super(key: key);
+    super.key,
+  });
+
+  final String activityType;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
