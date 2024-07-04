@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BoringApp extends StatelessWidget {
-  final ActivityCubit activityCubit;
-  final ScrollController scrollController;
-
   const BoringApp({
-    super.key,
     required this.activityCubit,
     required this.scrollController,
+    super.key,
   });
+
+  final ActivityCubit activityCubit;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
