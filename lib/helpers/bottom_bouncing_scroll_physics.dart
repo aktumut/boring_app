@@ -4,8 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class BottomBouncingScrollPhysics extends ScrollPhysics {
-  const BottomBouncingScrollPhysics({ScrollPhysics? parent})
-      : super(parent: parent);
+  const BottomBouncingScrollPhysics({super.parent});
 
   @override
   BottomBouncingScrollPhysics applyTo(ScrollPhysics? ancestor) {
@@ -17,39 +16,44 @@ class BottomBouncingScrollPhysics extends ScrollPhysics {
 
   @override
   double applyPhysicsToUserOffset(ScrollMetrics position, double offset) {
-    assert(offset != 0.0);
-    assert(position.minScrollExtent <= position.maxScrollExtent);
+    assert(offset != 0.0, 'Offset should not be zero');
+    assert(
+      position.minScrollExtent <= position.maxScrollExtent,
+      'minScrollExtent should be less than or equal to maxScrollExtent',
+    );
 
     if (!position.outOfRange) return offset;
 
-    //final double overscrollPastStart = math.max(position.minScrollExtent - position.pixels, 0.0);
     final double overscrollPastEnd =
-        math.max(position.pixels - position.maxScrollExtent, 0.0);
-    final double overscrollPast =
-        overscrollPastEnd; //math.max(overscrollPastStart, overscrollPastEnd);
-    final bool easing = (overscrollPastEnd > 0.0 && offset > 0.0);
+        math.max(position.pixels - position.maxScrollExtent, 0);
+    final overscrollPast = overscrollPastEnd;
+    final easing = overscrollPastEnd > 0.0 && offset > 0.0;
 
-    final double friction = easing
-        // Apply less resistance when easing the overscroll vs tensioning.
+    final friction = easing
         ? frictionFactor(
-            (overscrollPast - offset.abs()) / position.viewportDimension)
+            (overscrollPast - offset.abs()) / position.viewportDimension,
+          )
         : frictionFactor(overscrollPast / position.viewportDimension);
-    final double direction = offset.sign;
+    final direction = offset.sign;
 
     return direction * _applyFriction(overscrollPast, offset.abs(), friction);
   }
 
   static double _applyFriction(
-      double extentOutside, double absDelta, double gamma) {
-    assert(absDelta > 0);
-    double total = 0.0;
+    double extentOutside,
+    double absDelta,
+    double gamma,
+  ) {
+    assert(absDelta > 0, 'absDelta should be greater than zero');
+    var total = 0;
+    var newAbsDelta = absDelta;
     if (extentOutside > 0) {
-      final double deltaToLimit = extentOutside / gamma;
-      if (absDelta < deltaToLimit) return absDelta * gamma;
-      total += extentOutside;
-      absDelta -= deltaToLimit;
+      final deltaToLimit = extentOutside / gamma;
+      if (newAbsDelta < deltaToLimit) return newAbsDelta * gamma;
+      total += extentOutside.toInt();
+      newAbsDelta -= deltaToLimit;
     }
-    return total + absDelta;
+    return total + newAbsDelta;
   }
 
   @override
@@ -58,21 +62,20 @@ class BottomBouncingScrollPhysics extends ScrollPhysics {
         position.pixels <= position.minScrollExtent) {
       return value - position.pixels;
     }
-    // if (position.maxScrollExtent <= position.pixels && position.pixels < value) // overscroll
-    //   return value - position.pixels;
     if (value < position.minScrollExtent &&
         position.minScrollExtent < position.pixels) {
       return value - position.minScrollExtent;
     }
-    // if (position.pixels < position.maxScrollExtent && position.maxScrollExtent < value) // hit bottom edge
-    //   return value - position.maxScrollExtent;
-    return 0.0;
+    return 0;
   }
 
   @override
   Simulation? createBallisticSimulation(
-      ScrollMetrics position, double velocity) {
-    final Tolerance tolerance = this.tolerance;
+    ScrollMetrics position,
+    double velocity,
+  ) {
+    final tolerance =
+        toleranceFor(position); // Use toleranceFor instead of tolerance
     if (velocity.abs() >= tolerance.velocity || position.outOfRange) {
       return BouncingScrollSimulation(
         spring: spring,
@@ -92,8 +95,10 @@ class BottomBouncingScrollPhysics extends ScrollPhysics {
   @override
   double carriedMomentum(double existingVelocity) {
     return existingVelocity.sign *
-        math.min(0.000816 * math.pow(existingVelocity.abs(), 1.967).toDouble(),
-            40000.0);
+        math.min(
+          0.000816 * math.pow(existingVelocity.abs(), 1.967).toDouble(),
+          40000.0,
+        );
   }
 
   @override
