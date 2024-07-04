@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 
 class ImageWithText extends StatelessWidget {
   const ImageWithText({
-    super.key,
     required this.activity,
+    super.key,
   });
 
   final ActivityModel activity;
@@ -32,9 +32,9 @@ class ImageWithText extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            FavIcon(activity: activity)
+            FavIcon(activity: activity),
           ],
-        )
+        ),
       ],
     );
   }
