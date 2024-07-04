@@ -7,9 +7,12 @@ import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class ActivityListTile extends StatelessWidget {
-  final ActivityModel activity;
+  const ActivityListTile({
+    required this.activity,
+    super.key,
+  });
 
-  const ActivityListTile({super.key, required this.activity});
+  final ActivityModel activity;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class ActivityListTile extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(
+          MaterialPageRoute<ActivityDetailsPage>(
             builder: (context) => ActivityDetailsPage(activity: activity),
           ),
         );
