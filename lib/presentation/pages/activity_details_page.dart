@@ -9,10 +9,10 @@ import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
 class ActivityDetailsPage extends StatelessWidget {
+
+  const ActivityDetailsPage({required this.activity, super.key});
   final ActivityModel activity;
   static const String id = 'activity_details_page';
-
-  const ActivityDetailsPage({super.key, required this.activity});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class ActivityDetailsPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(
                   horizontal: tSpaceHorizontalPadding,
-                  vertical: tSpaceVerticalPadding),
+                  vertical: tSpaceVerticalPadding,),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
