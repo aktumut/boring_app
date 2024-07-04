@@ -11,35 +11,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'activity_state.dart';
 
-/// Manages the state of activities in the application.
 class ActivityCubit extends Cubit<ActivityState> {
-  /// Creates an instance of `ActivityCubit` with a given [ActivityRepository].
-  ///
-  /// The [scrollController] is used to listen for scroll events to fetch more.
   ActivityCubit(this._activityRepository, this.scrollController)
       : super(ActivityLoading()) {
     scrollController.addListener(_fetchMoreActivities);
   }
 
-  /// Controls the scroll position for activities.
   final ScrollController scrollController;
 
-  /// Repository for fetching activity data.
   final ActivityRepository _activityRepository;
 
-  /// A cache of all fetched activities.
   final List<ActivityModel> _allActivities = [];
 
-  /// List of activity types available for filtering.
   List<String> activityTypes = [];
 
-  /// A set of activity types used for filtering, initialized with 'All'.
   Set<String> activityTypesSet = {tTextFilterAll};
 
-  /// The current value of the price filter slider.
   double currentSliderValue = 1;
 
-  /// Fetches activities and handles the state accordingly.
   Future<void> fetchActivities() async {
     try {
       await _fetchAndProcessActivities(activityTypesSet);
@@ -63,20 +52,33 @@ class ActivityCubit extends Cubit<ActivityState> {
   Future<void> _fetchAndProcessActivities(Set<String> activityTypesSet) async {
     for (var i = 0; i < tNumberOfActivities; i++) {
       final activity = await _activityRepository.fetchActivity();
-      activity.likes = math.Random().nextInt(tMaxLikes);
-      _allActivities.add(activity);
-      activityTypesSet.add(activity.type!);
+      final updatedActivity = activity.copyWith(
+        likes: math.Random().nextInt(tMaxLikes),
+      );
+      _allActivities.add(updatedActivity);
+      activityTypesSet.add(updatedActivity.type!);
     }
   }
 
   Future<void> _updateActivityLikes() async {
     final prefs = await SharedPreferences.getInstance();
-    for (final activity in _allActivities) {
-      activity.isLiked = prefs.getBool(activity.key!) ?? false;
+    for (var i = 0; i < _allActivities.length; i++) {
+      final activity = _allActivities[i];
+      final updatedActivity = activity.copyWith(
+        isLiked: prefs.getBool(activity.key!) ?? false,
+        likes: prefs.getInt('${activity.key!}_likes') ?? 0,
+      );
+      _allActivities[i] = updatedActivity;
     }
   }
 
-  /// Filters activities by the given [selectedType].
+  // Future<void> _updateActivityLikes() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   for (final activity in _allActivities) {
+  //     activity.isLiked = prefs.getBool(activity.key!) ?? false;
+  //   }
+  // }
+
   void filterActivities(String selectedType) {
     final filteredActivities = selectedType == tTextFilterAll
         ? _allActivities
@@ -104,7 +106,6 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
   }
 
-  /// Filters activities by the given [price].
   void filterActivitiesByPrice(double price) {
     List<ActivityModel> filteredActivities;
 
@@ -139,7 +140,6 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
   }
 
-  /// Updates the slider value for price filtering and emits a new state.
   void updateSliderValue(double value) {
     if (state is ActivityLoaded) {
       currentSliderValue = value;
@@ -147,7 +147,6 @@ class ActivityCubit extends Cubit<ActivityState> {
     }
   }
 
-  /// Filters activities by the number of [participantCount].
   void filterActivitiesByParticipants(int participantCount) {
     List<ActivityModel> filteredActivities;
 
