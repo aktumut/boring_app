@@ -1,18 +1,20 @@
 import 'package:boring_app/data/models/activity_model.dart';
 import 'package:boring_app/data/providers/network_provider.dart';
-import 'package:dio/dio.dart';
 
 class ActivityRepository {
+  ActivityRepository(this._networkProvider);
+
   final NetworkProvider _networkProvider;
 
   final Set<String> _activityTypes = {};
 
-  ActivityRepository(this._networkProvider);
-
   Future<ActivityModel> fetchActivity() async {
-    final Response<dynamic> response = await _networkProvider.get('/activity');
+    final response =
+        await _networkProvider.get<Map<String, dynamic>>('/activity');
     if (response.statusCode == 200) {
-      final ActivityModel activity = ActivityModel.fromJson(response.data);
+      final data = response.data!;
+
+      final activity = ActivityModel.fromJson(data);
       _activityTypes.add(activity.type!);
       return activity;
     } else {
