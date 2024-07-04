@@ -12,14 +12,15 @@ class ResetAppBarButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: IconButton(
-          icon: const Icon(
-            Icons.keyboard_arrow_up_sharp,
-            color: tColorWhite,
-            size: tSizeIconFilterWidget,
-          ),
-          onPressed: () {
-            context.read<AppBarCubit>().resetAppBar();
-          }),
+        icon: const Icon(
+          Icons.keyboard_arrow_up_sharp,
+          color: tColorWhite,
+          size: tSizeIconFilterWidget,
+        ),
+        onPressed: () {
+          context.read<AppBarCubit>().resetAppBar();
+        },
+      ),
     );
   }
 }

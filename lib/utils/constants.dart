@@ -13,7 +13,7 @@ const String tTextExtraInformation = 'Extra information';
 const String tTextAccessibility = 'Accessibility';
 
 // Api
-const String tTextBaseUrl = 'http://www.boredapi.com/api';
+const String tTextBaseUrl = 'https://bored.api.lewagon.com/api';
 const String tTextFilterAll = 'All';
 const double tNumberOfActivities = 3;
 const int tMaxLikes = 10;

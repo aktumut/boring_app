@@ -10,9 +10,12 @@ import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class ActivityListTileDetails extends StatelessWidget {
-  final ActivityModel activity;
+  const ActivityListTileDetails({
+    required this.activity,
+    super.key,
+  });
 
-  const ActivityListTileDetails({super.key, required this.activity});
+  final ActivityModel activity;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +37,10 @@ class ActivityListTileDetails extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: tSpaceBase),
-        Text(capitalizeFirstLetter(activity.type ?? tTextRandomActivity),
-            style: tTextStyleActivityListTileHeader),
+        Text(
+          capitalizeFirstLetter(activity.type ?? tTextRandomActivity),
+          style: tTextStyleActivityListTileHeader,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: tSpaceQuarter),
           child: _buildAccessibilityAndParticipants(),
@@ -55,10 +60,13 @@ class ActivityListTileDetails extends StatelessWidget {
   Widget _buildAccessibilityAndParticipants() {
     return Row(
       children: [
-        const Icon(Icons.person,
-            size: tSizeActivityListTileIcon, color: tColorDarkGray),
+        const Icon(
+          Icons.person,
+          size: tSizeActivityListTileIcon,
+          color: tColorDarkGray,
+        ),
         Text(
-          '${activity.participants.toString()} | $tTextAccessibility: ${formatAccessibility(activity.accessibility!)}/10',
+          '${activity.participants} | $tTextAccessibility: ${formatAccessibility(activity.accessibility!)}/10',
           style: tTextStyleActivityListTileSubHeader,
         ),
       ],
@@ -68,9 +76,11 @@ class ActivityListTileDetails extends StatelessWidget {
   Widget _buildActivityPricing() {
     return Column(
       children: [
-        Icon(Icons.euro,
-            size: tSizeActivityListTilePriceIcon,
-            color: getColorBasedOnInfo(activity.price!)),
+        Icon(
+          Icons.euro,
+          size: tSizeActivityListTilePriceIcon,
+          color: getColorBasedOnInfo(activity.price!),
+        ),
         const SizedBox(height: tSpaceHalf),
         Text(
           formatPriceText(activity.price!),

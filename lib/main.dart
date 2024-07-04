@@ -7,23 +7,24 @@ import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await SystemChrome.setPreferredOrientations(
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  );
   SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+    const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+  );
 
-  final Widget app = initializeApp();
+  final app = initializeApp();
 
   runApp(app);
 }
 
 Widget initializeApp() {
-  final NetworkProvider networkProvider = NetworkProvider();
-  final ActivityRepository activityRepository =
-      ActivityRepository(networkProvider);
-  final ScrollController scrollController = ScrollController();
-  final ActivityCubit activityCubit =
-      ActivityCubit(activityRepository, scrollController)..fetchActivities();
+  final networkProvider = NetworkProvider();
+  final activityRepository = ActivityRepository(networkProvider);
+  final scrollController = ScrollController();
+  final activityCubit = ActivityCubit(activityRepository, scrollController)
+    ..fetchActivities();
 
   return BoringApp(
     scrollController: scrollController,

@@ -6,6 +6,19 @@ final ThemeData appThemeData = ThemeData(
   primarySwatch: tMaterialColorPrimary,
   fontFamily: tTextRegularFont,
   visualDensity: VisualDensity.adaptivePlatformDensity,
+  appBarTheme: const AppBarTheme(
+    elevation: 0,
+    color: tColorPrimary,
+  ),
+  buttonTheme: const ButtonThemeData(
+    buttonColor: tColorPrimary,
+    textTheme: ButtonTextTheme.primary,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(tRadiusButton),
+      ),
+    ),
+  ),
 );
 
 // Spacings and Paddings

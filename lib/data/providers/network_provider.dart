@@ -3,8 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 class NetworkProvider {
-  late final Dio _dio;
-
   NetworkProvider() {
     _dio = Dio(
       BaseOptions(
@@ -15,13 +13,16 @@ class NetworkProvider {
     );
   }
 
+  late final Dio _dio;
+
   Future<Response<T>> _httpWrapper<T>(
-      Future<Response<T>> Function() dioCall) async {
+    Future<Response<T>> Function() dioCall,
+  ) async {
     try {
       return await dioCall();
     } catch (e) {
       if (kDebugMode) {
-        print(e.toString());
+        print(e);
       }
       rethrow;
     }

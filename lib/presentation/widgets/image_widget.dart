@@ -6,14 +6,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ImageWidget extends StatelessWidget {
-  final ActivityModel activity;
-  final bool isShadow;
-
   const ImageWidget({
-    super.key,
     required this.activity,
     required this.isShadow,
+    super.key,
   });
+
+  final ActivityModel activity;
+  final bool isShadow;
 
   @override
   Widget build(BuildContext context) {

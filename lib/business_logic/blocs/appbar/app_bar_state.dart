@@ -19,9 +19,9 @@ class AppBarCollapsed extends AppBarState {
 }
 
 class AppBarWithAllFilters extends AppBarState {
-  double heightAppBarWithFilters;
+  const AppBarWithAllFilters(this.heightAppBarWithFilters) : super();
 
-  AppBarWithAllFilters(this.heightAppBarWithFilters) : super();
+  final double heightAppBarWithFilters;
 
   @override
   List<Object> get props => [heightAppBarWithFilters];

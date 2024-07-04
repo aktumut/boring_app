@@ -3,16 +3,19 @@ import 'package:boring_app/helpers/bottom_bouncing_scroll_physics.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/activity_list.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/call_to_action_button.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/curved_shape_painter.dart';
-import 'package:boring_app/presentation/widgets/home_page_widgets/custom_sliver_appbar.dart';
+import 'package:boring_app/presentation/widgets/home_page_widgets/custom_sliver_app_bar.dart';
 import 'package:boring_app/presentation/widgets/home_page_widgets/reset_app_bar_button.dart';
 import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
-  ScrollController scrollController;
+  const HomePage({
+    required this.scrollController,
+    super.key,
+  });
 
-  HomePage({required this.scrollController, super.key});
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +50,10 @@ class HomePage extends StatelessWidget {
                       ),
                       child: ActivityList(),
                     ),
-                    state is! AppBarWithAllFilters
-                        ? const CallToActionButton()
-                        : Container(),
-                    state is AppBarWithAllFilters
-                        ? const ResetAppBarButton()
-                        : Container(),
+                    if (state is! AppBarWithAllFilters)
+                      const CallToActionButton(),
+                    if (state is AppBarWithAllFilters)
+                      const ResetAppBarButton(),
                   ],
                 ),
               ),

@@ -12,17 +12,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 part 'activity_state.dart';
 
 class ActivityCubit extends Cubit<ActivityState> {
-  final ScrollController scrollController;
-  final ActivityRepository _activityRepository;
-  final List<ActivityModel> _allActivities = [];
-  List<String> activityTypes = [];
-  Set<String> activityTypesSet = {tTextFilterAll};
-  double currentSliderValue = 1;
-
   ActivityCubit(this._activityRepository, this.scrollController)
       : super(ActivityLoading()) {
     scrollController.addListener(_fetchMoreActivities);
   }
+
+  final ScrollController scrollController;
+
+  final ActivityRepository _activityRepository;
+
+  final List<ActivityModel> _allActivities = [];
+
+  List<String> activityTypes = [];
+
+  Set<String> activityTypesSet = {tTextFilterAll};
+
+  double currentSliderValue = 1;
 
   Future<void> fetchActivities() async {
     try {
@@ -31,40 +36,66 @@ class ActivityCubit extends Cubit<ActivityState> {
       await _updateActivityLikes();
       activityTypes = activityTypesSet.toList();
 
-      emit(ActivityLoaded(
-          _allActivities, activityTypes, tTextFilterAll, currentSliderValue));
+      emit(
+        ActivityLoaded(
+          _allActivities,
+          activityTypes,
+          tTextFilterAll,
+          currentSliderValue,
+        ),
+      );
     } catch (exception) {
       emit(ActivityError(exception.toString()));
     }
   }
 
   Future<void> _fetchAndProcessActivities(Set<String> activityTypesSet) async {
-    for (int i = 0; i < tNumberOfActivities; i++) {
-      ActivityModel activity = await _activityRepository.fetchActivity();
-      activity.likes = math.Random().nextInt(tMaxLikes);
-      _allActivities.add(activity);
-      activityTypesSet.add(activity.type!);
+    for (var i = 0; i < tNumberOfActivities; i++) {
+      final activity = await _activityRepository.fetchActivity();
+      final updatedActivity = activity.copyWith(
+        likes: math.Random().nextInt(tMaxLikes),
+      );
+      _allActivities.add(updatedActivity);
+      activityTypesSet.add(updatedActivity.type!);
     }
   }
 
   Future<void> _updateActivityLikes() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    for (var activity in _allActivities) {
-      activity.isLiked = prefs.getBool(activity.key!) ?? false;
+    final prefs = await SharedPreferences.getInstance();
+    for (var i = 0; i < _allActivities.length; i++) {
+      final activity = _allActivities[i];
+      final updatedActivity = activity.copyWith(
+        isLiked: prefs.getBool(activity.key!) ?? false,
+        likes: prefs.getInt('${activity.key!}_likes') ?? 0,
+      );
+      _allActivities[i] = updatedActivity;
     }
   }
 
+  // Future<void> _updateActivityLikes() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   for (final activity in _allActivities) {
+  //     activity.isLiked = prefs.getBool(activity.key!) ?? false;
+  //   }
+  // }
+
   void filterActivities(String selectedType) {
-    List<ActivityModel> filteredActivities = selectedType == tTextFilterAll
+    final filteredActivities = selectedType == tTextFilterAll
         ? _allActivities
         : _allActivities
-            .where((activity) => activity.type == selectedType)
+            .where((ActivityModel activity) => activity.type == selectedType)
             .toList();
 
     if (state is ActivityLoaded || state is ActivityLikeUpdate) {
-      ActivityLoaded currentState = state as ActivityLoaded;
-      emit(ActivityLoaded(filteredActivities, currentState.activityTypes,
-          selectedType, currentSliderValue));
+      final currentState = state as ActivityLoaded;
+      emit(
+        ActivityLoaded(
+          filteredActivities,
+          currentState.activityTypes,
+          selectedType,
+          currentSliderValue,
+        ),
+      );
     }
   }
 
@@ -79,23 +110,33 @@ class ActivityCubit extends Cubit<ActivityState> {
     List<ActivityModel> filteredActivities;
 
     if (state is ActivityLoaded) {
-      ActivityLoaded currentState = state as ActivityLoaded;
+      final currentState = state as ActivityLoaded;
       if (currentState.selectedFilter != tTextFilterAll) {
         filteredActivities = _allActivities
-            .where((ActivityModel activity) =>
-                activity.type == currentState.selectedFilter &&
-                activity.price != null &&
-                activity.price! * 10 <= price)
+            .where(
+              (ActivityModel activity) =>
+                  activity.type == currentState.selectedFilter &&
+                  activity.price != null &&
+                  activity.price! * 10 <= price,
+            )
             .toList();
       } else {
         filteredActivities = _allActivities
-            .where((ActivityModel activity) =>
-                activity.price != null && (activity.price! * 10) <= price)
+            .where(
+              (ActivityModel activity) =>
+                  activity.price != null && (activity.price! * 10) <= price,
+            )
             .toList();
       }
 
-      emit(ActivityLoaded(filteredActivities, currentState.activityTypes,
-          currentState.selectedFilter, price));
+      emit(
+        ActivityLoaded(
+          filteredActivities,
+          currentState.activityTypes,
+          currentState.selectedFilter,
+          price,
+        ),
+      );
     }
   }
 
@@ -110,24 +151,34 @@ class ActivityCubit extends Cubit<ActivityState> {
     List<ActivityModel> filteredActivities;
 
     if (state is ActivityLoaded) {
-      ActivityLoaded currentState = state as ActivityLoaded;
+      final currentState = state as ActivityLoaded;
       if (currentState.selectedFilter != tTextFilterAll) {
         filteredActivities = _allActivities
-            .where((ActivityModel activity) =>
-                activity.type == currentState.selectedFilter &&
-                activity.participants != null &&
-                activity.participants! == participantCount)
+            .where(
+              (ActivityModel activity) =>
+                  activity.type == currentState.selectedFilter &&
+                  activity.participants != null &&
+                  activity.participants! == participantCount,
+            )
             .toList();
       } else {
         filteredActivities = _allActivities
-            .where((ActivityModel activity) =>
-                activity.participants != null &&
-                (activity.participants!) == participantCount)
+            .where(
+              (ActivityModel activity) =>
+                  activity.participants != null &&
+                  (activity.participants!) == participantCount,
+            )
             .toList();
       }
 
-      emit(ActivityLoaded(filteredActivities, currentState.activityTypes,
-          currentState.selectedFilter, currentState.currentSliderValue));
+      emit(
+        ActivityLoaded(
+          filteredActivities,
+          currentState.activityTypes,
+          currentState.selectedFilter,
+          currentState.currentSliderValue,
+        ),
+      );
     }
   }
 }

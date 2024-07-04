@@ -2,18 +2,24 @@
 
 ## Description
 
-Boring App is a mobile application built using Flutter that interfaces with the Bored API to present users with various
-activities to engage in. The app dynamically categorizes activities and allows users to 'like' their favorite ones,
-saving preferences locally for future reference. It features an infinite scrolling mechanism, fetching new activities as
+Boring App is a mobile application built using Flutter that interfaces with the Bored API to present
+users with various
+activities to engage in. The app dynamically categorizes activities and allows users to 'like' their
+favorite ones,
+saving preferences locally for future reference. It features an infinite scrolling mechanism,
+fetching new activities as
 the user scrolls, ensuring a continuous stream of suggestions.
 
 ## Features
 
-- **Categorized Activities**: Activities are presented in categories, enabling easy navigation and selection based on
+- **Categorized Activities**: Activities are presented in categories, enabling easy navigation and
+  selection based on
   user interest.
-- **Likes and Preferences**: Users can 'like' activities, with these preferences being saved to the device for quick
+- **Likes and Preferences**: Users can 'like' activities, with these preferences being saved to the
+  device for quick
   recognition of previously favored activities.
-- **Infinite Scrolling**: The app continuously loads new activities as the user scrolls, providing an endless supply of
+- **Infinite Scrolling**: The app continuously loads new activities as the user scrolls, providing
+  an endless supply of
   suggestions.
 
 ## Packages
@@ -34,7 +40,8 @@ dependencies:
 
 ## Architecture Overview
 
-The Boring App is structured to follow clean architecture principles, separating concerns into logical layers, and
+The Boring App is structured to follow clean architecture principles, separating concerns into
+logical layers, and
 utilizing the BLoC pattern for state management.
 
 ### Directory Structure
@@ -63,33 +70,42 @@ utilizing the BLoC pattern for state management.
 
 #### Business Logic Layer
 
-- **Repositories (`business_logic/repositories/`):** Mediate between data providers and BLoC layers, providing a clean
+- **Repositories (`business_logic/repositories/`):** Mediate between data providers and BLoC layers,
+  providing a clean
   API for data requests.
-- **BLoCs/Cubits (`business_logic/blocs/`):** Manage the state of the application for various features, emitting new
+- **BLoCs/Cubits (`business_logic/blocs/`):** Manage the state of the application for various
+  features, emitting new
   states in response to events.
 
 #### Presentation Layer
 
-- **Pages (`presentation/pages/`):** Screens of the application, subscribing to state changes and presenting UI.
+- **Pages (`presentation/pages/`):** Screens of the application, subscribing to state changes and
+  presenting UI.
 - **Widgets (`presentation/widgets/`):** Reusable UI components.
 
 #### Helpers and Utilities
 
-- **Helpers (`helpers/`):** Functions for common operations like formatting and updating shared preferences.
-- **Utilities (`utils/`):** Provide constants, icons, images, theme data, and text styles used across the app.
+- **Helpers (`helpers/`):** Functions for common operations like formatting and updating shared
+  preferences.
+- **Utilities (`utils/`):** Provide constants, icons, images, theme data, and text styles used
+  across the app.
 
 ## Data Flow
 
-1. **API Communication**: The app uses the **Dio** package to perform HTTP requests, retrieving data from the Bored API.
-2. **State Management**: State is managed via the flutter_bloc package, which orchestrates the flow of data within the
+1. **API Communication**: The app uses the **Dio** package to perform HTTP requests, retrieving data
+   from the Bored API.
+2. **State Management**: State is managed via the flutter_bloc package, which orchestrates the flow
+   of data within the
    app, ensuring a reactive and responsive user experience.
-3. **Local Storage**: User preferences, such as liked activities, are stored locally with the shared_preferences
+3. **Local Storage**: User preferences, such as liked activities, are stored locally with the
+   shared_preferences
    package, allowing for personalization and a more tailored user experience.
 
 ## Running the Boring App
 
 This guide assumes that you have Flutter installed on your machine. If not, please refer to
-the [Flutter installation documentation](https://flutter.dev/docs/get-started/install) to set up Flutter on your system.
+the [Flutter installation documentation](https://flutter.dev/docs/get-started/install) to set up
+Flutter on your system.
 
 ### Prerequisites
 
@@ -104,7 +120,7 @@ Before running the app, make sure you have the following installed:
 
 1. **Clone the Repository:**
    ```shell
-   git clone https://github.com/your-username/boring-app.git
+   git clone https://github.com/aktumut/boring-app.git
    cd boring-app
     ```
 2. **Get Packages:**
@@ -114,12 +130,15 @@ Before running the app, make sure you have the following installed:
     ```
 
 4. **Launch Emulator/Simulator:**
-   To run the app on an emulator or simulator, ensure that it is running before executing the app. For Android Studio
-   and IntelliJ, you can start an emulator via the AVD Manager. For VS Code, you can start it from the Command Palette
+   To run the app on an emulator or simulator, ensure that it is running before executing the app.
+   For Android Studio
+   and IntelliJ, you can start an emulator via the AVD Manager. For VS Code, you can start it from
+   the Command Palette
    by searching for `Flutter: Launch Emulator`.
 
 5. **Run the App:**
-   With the emulator or simulator running, or a physical device connected, execute the following command to run the app:
+   With the emulator or simulator running, or a physical device connected, execute the following
+   command to run the app:
    ```shell
    flutter run
      ```

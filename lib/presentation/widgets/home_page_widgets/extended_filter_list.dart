@@ -19,7 +19,10 @@ class ExtendedFilterList extends StatelessWidget {
           return Column(
             children: [
               _buildExtendedFilterList(
-                  state.activityTypes, state.selectedFilter, context),
+                state.activityTypes,
+                state.selectedFilter,
+                context,
+              ),
               buildPriceParticipantInput(context, state),
             ],
           );
@@ -32,10 +35,15 @@ class ExtendedFilterList extends StatelessWidget {
     );
   }
 
-  Padding buildPriceParticipantInput(BuildContext context, state) {
+  Padding buildPriceParticipantInput(
+    BuildContext context,
+    ActivityLoaded state,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-          vertical: tSpaceHalf, horizontal: tSpaceHalf),
+        vertical: tSpaceHalf,
+        horizontal: tSpaceHalf,
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         textBaseline: TextBaseline.alphabetic,
@@ -48,7 +56,10 @@ class ExtendedFilterList extends StatelessWidget {
   }
 
   Widget _buildExtendedFilterList(
-      List<String> activityTypes, String selectedFilter, BuildContext context) {
+    List<String> activityTypes,
+    String selectedFilter,
+    BuildContext context,
+  ) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: tSpaceBase),
       width: double.infinity,
@@ -57,9 +68,11 @@ class ExtendedFilterList extends StatelessWidget {
           spacing: tSpaceBase,
           runSpacing: tSpaceBase,
           children: activityTypes.map((activityType) {
-            final bool isSelected = selectedFilter == activityType;
+            final isSelected = selectedFilter == activityType;
             return FilterIcon(
-                activityType: activityType, isSelected: isSelected);
+              activityType: activityType,
+              isSelected: isSelected,
+            );
           }).toList(),
         ),
       ),

@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PriceSlider extends StatelessWidget {
-  final ActivityLoaded state;
-
   const PriceSlider({
-    super.key,
     required this.state,
+    super.key,
   });
+
+  final ActivityLoaded state;
 
   @override
   Widget build(BuildContext context) {

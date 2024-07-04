@@ -9,17 +9,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'activity_like_state.dart';
 
 class ActivityLikeCubit extends Cubit<ActivityLikeState> {
-  final ActivityCubit activityCubit;
-  late final StreamSubscription activitySubscription;
-  List<ActivityModel> _allActivities = [];
-
   ActivityLikeCubit(this.activityCubit) : super(ActivityLikeInitial());
 
+  final ActivityCubit activityCubit;
+
+  late final StreamSubscription<ActivityState> activitySubscription;
+
+  List<ActivityModel> _allActivities = [];
+
   void init() {
-    final ActivityState currentState = activityCubit.state;
+    final currentState = activityCubit.state;
     if (currentState is ActivityLoaded) {
       _allActivities = currentState.activities;
     }
+
     activitySubscription = activityCubit.stream.listen(
       (ActivityState state) {
         if (state is ActivityLoaded) {
@@ -30,15 +33,28 @@ class ActivityLikeCubit extends Cubit<ActivityLikeState> {
   }
 
   void toggleLike(ActivityModel activity) {
-    int index =
+    final index =
         _allActivities.indexWhere((ActivityModel a) => a.key == activity.key);
     if (index != -1) {
-      _allActivities[index].isLiked = !_allActivities[index].isLiked;
-      _allActivities[index].likes += _allActivities[index].isLiked ? 1 : -1;
+      final updatedActivity = _allActivities[index].copyWith(
+        isLiked: !_allActivities[index].isLiked,
+        likes: _allActivities[index].isLiked
+            ? _allActivities[index].likes - 1
+            : _allActivities[index].likes + 1,
+      );
+      _allActivities[index] = updatedActivity;
+
       updateSharedPreferences(
-          _allActivities[index].key!, _allActivities[index].isLiked);
-      emit(ActivityLikeUpdate(
-          _allActivities[index].isLiked, _allActivities[index].likes));
+        _allActivities[index].key!,
+        isLiked: _allActivities[index].isLiked,
+      );
+
+      emit(
+        ActivityLikeUpdate(
+          isLiked: _allActivities[index].isLiked,
+          numberOfLikes: _allActivities[index].likes,
+        ),
+      );
     }
   }
 

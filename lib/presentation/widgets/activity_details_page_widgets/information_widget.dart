@@ -3,14 +3,14 @@ import 'package:boring_app/utils/theme.dart';
 import 'package:flutter/material.dart';
 
 class InformationWidget extends StatelessWidget {
-  final String informationIconText;
-  final Widget informationIconWidget;
-
   const InformationWidget({
-    super.key,
     required this.informationIconText,
     required this.informationIconWidget,
+    super.key,
   });
+
+  final String informationIconText;
+  final Widget informationIconWidget;
 
   @override
   Widget build(BuildContext context) {

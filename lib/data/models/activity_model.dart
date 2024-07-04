@@ -1,47 +1,22 @@
-class ActivityModel {
-  final String? activity;
-  final String? type;
-  final int? participants;
-  final double? price;
-  final String? link;
-  final String? key;
-  final double? accessibility;
-  int likes;
-  bool isLiked;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  ActivityModel({
-    this.activity,
-    this.type,
-    this.participants,
-    this.price,
-    this.link,
-    this.key,
-    this.accessibility,
-    this.likes = 0,
-    this.isLiked = false,
-  });
+part 'activity_model.freezed.dart';
+part 'activity_model.g.dart';
 
-  factory ActivityModel.fromJson(Map<String, dynamic> json) {
-    return ActivityModel(
-      activity: json['activity'] as String?,
-      type: json['type'] as String?,
-      participants: json['participants'] as int?,
-      price: json['price']?.toDouble(),
-      link: json['link'] as String?,
-      key: json['key'] as String?,
-      accessibility: json['accessibility']?.toDouble(),
-    );
-  }
+@freezed
+class ActivityModel with _$ActivityModel {
+  const factory ActivityModel({
+    String? activity,
+    String? type,
+    int? participants,
+    double? price,
+    String? link,
+    String? key,
+    double? accessibility,
+    @Default(0) int likes,
+    @Default(false) bool isLiked,
+  }) = _ActivityModel;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'activity': activity,
-      'type': type,
-      'participants': participants,
-      'price': price,
-      'link': link,
-      'key': key,
-      'accessibility': accessibility,
-    };
-  }
+  factory ActivityModel.fromJson(Map<String, dynamic> json) =>
+      _$ActivityModelFromJson(json);
 }
