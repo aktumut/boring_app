@@ -27,7 +27,6 @@ class CustomSliverAppBar extends StatelessWidget {
           expandedHeight: state is AppBarWithAllFilters
               ? state.heightAppBarWithFilters
               : tHeightAppBar,
-          floating: false,
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
             centerTitle: false,
@@ -36,7 +35,8 @@ class CustomSliverAppBar extends StatelessWidget {
             background: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: tSpaceHorizontalPadding),
+                  horizontal: tSpaceHorizontalPadding,
+                ),
                 child: state is AppBarWithAllFilters
                     ? _extendedFlexibleSpaceContent()
                     : _customFlexibleSpaceContent(),
