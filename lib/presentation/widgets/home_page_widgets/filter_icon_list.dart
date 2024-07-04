@@ -15,7 +15,10 @@ class FilterIconList extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         } else if (state is ActivityLoaded) {
           return _buildFilterList(
-              state.activityTypes, state.selectedFilter, context);
+            state.activityTypes,
+            state.selectedFilter,
+            context,
+          );
         } else if (state is ActivityError) {
           return Center(child: Text(state.message));
         } else {
@@ -26,7 +29,10 @@ class FilterIconList extends StatelessWidget {
   }
 
   Widget _buildFilterList(
-      List<String> activityTypes, String selectedFilter, BuildContext context) {
+    List<String> activityTypes,
+    String selectedFilter,
+    BuildContext context,
+  ) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: tSpaceBase),
       height: tHeightFilterWidget,
@@ -35,8 +41,8 @@ class FilterIconList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: activityTypes.length,
         itemBuilder: (BuildContext context, int index) {
-          final String activityType = activityTypes[index];
-          final bool isSelected = selectedFilter == activityType;
+          final activityType = activityTypes[index];
+          final isSelected = selectedFilter == activityType;
           return FilterIcon(activityType: activityType, isSelected: isSelected);
         },
       ),
