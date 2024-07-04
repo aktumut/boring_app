@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavIcon extends StatelessWidget {
   const FavIcon({
-    super.key,
     required this.activity,
+    super.key,
   });
 
   final ActivityModel activity;
@@ -16,7 +16,7 @@ class FavIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ActivityLikeCubit, ActivityLikeState>(
-      builder: (context, state) {
+      builder: (BuildContext context, ActivityLikeState state) {
         return Positioned(
           right: tSpaceDouble,
           bottom: tSpaceBase,
@@ -24,9 +24,10 @@ class FavIcon extends StatelessWidget {
             children: [
               GestureDetector(
                 child: Icon(
-                    activity.isLiked ? Icons.favorite : Icons.favorite_border,
-                    color: tColorWhite,
-                    size: tSizeActivityListTileFavoriIcon),
+                  activity.isLiked ? Icons.favorite : Icons.favorite_border,
+                  color: tColorWhite,
+                  size: tSizeActivityListTileFavoriIcon,
+                ),
                 onTap: () {
                   context.read<ActivityLikeCubit>().toggleLike(activity);
                 },
